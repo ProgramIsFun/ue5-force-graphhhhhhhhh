@@ -15,3 +15,5 @@ void ll(const FString& StringToLog, int SeverityLevel = 0, const FString& Prefix
 void lll(const FString& TextToWrite);
 
 FVector Jiggle(const FVector& Vec, float Magnitude);
+
+void eeeee();

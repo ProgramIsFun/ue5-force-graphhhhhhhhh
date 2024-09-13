@@ -4,7 +4,7 @@
 // #include <iostream>
 
 #include "Engine/Engine.h"
-
+// #include "Editor.h"
 // void ll(const FString& StringToLog)
 // {
 // 	if (!StringToLog.IsEmpty())
@@ -123,3 +123,18 @@ FVector Jiggle(const FVector& Vec, float Magnitude)
 	return Vec + RandomJitter;
 }
 
+
+
+
+#if WITH_EDITOR
+#include "Editor.h"
+
+void eeeee()
+{
+	if (GEditor)
+	{
+		GEditor->EndPlayMap();
+	}
+
+}
+#endif
