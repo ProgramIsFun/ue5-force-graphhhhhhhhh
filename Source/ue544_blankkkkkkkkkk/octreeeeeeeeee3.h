@@ -38,8 +38,8 @@ struct OctreeNode
 	PointData* Data = nullptr;
 
 	FVector CenterOfMass;
-	int TotalDataPoints = 0;
-	double Strength;
+	int32 TotalDataPoints = 0;
+	float Strength;
 	bool StrengthSet = false;
 	// double TotalWeight;
 

@@ -167,7 +167,7 @@ void OctreeNode::CalculateCenterOfMass()
 void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 {
 	FVector aggregatePosition = FVector(0);
-	double aggregateStrength = 0.0;
+	float aggregateStrength = 0.0;
 	int totalWeight = 0;
 
 	if (IsLeaf())
@@ -377,7 +377,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 
 		float theta2 = 0.81;
 		float distancemax = 1000000000;
-		long double distancemin = 1;
+		float distancemin = 1;
 		ll("-----------------");
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
 		ll("lower: " + (node->Center - node->Extent).ToString());
@@ -425,19 +425,44 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					
 				}
 
+
+
+
+				
 				if (l < distancemin)
 					l = sqrt(distancemin * l);
-
+				
 
 				//print(FString::SanitizeFloat(ns.strength));
 
-				// float mult = pow(ns.strength / nodeStrength, 1.0);
-				kn->velocity += dir
+				
+				FVector Vector = dir
 					*
 					node->Strength
 					*
-					alpha / l;
+					alpha;
+				ll("dir: " + dir.ToString());
+				ll("node->Strength: " + FString::SanitizeFloat(node->Strength));
+				ll("alpha: " + FString::SanitizeFloat(alpha));
+				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->velocity.ToString());
+				
+				// float mult = pow(ns.strength / nodeStrength, 1.0);
+				kn->velocity += Vector / l;
+				
+
 				ll("velocity: " + kn->velocity.ToString());
+
+				// This velocity is too large or too negative. 
+				// We need to normalize it.
+				if (1)
+				{
+					if (kn->velocity.Size() > 100000000000000)
+					{
+						ll("velocity is too large. eeeeeeeeeeeee ");
+						eeeee();
+						
+					}
+				}
 			}
 			ll("Early termination. ");
 			return true;
