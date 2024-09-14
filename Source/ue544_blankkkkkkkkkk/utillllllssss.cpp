@@ -20,9 +20,14 @@
 // 	}
 // }
 
+
+bool nologgggggggg=true;
+
+
+
 void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 {
-	if (0)
+	if (nologgggggggg)
 	{
 		return;
 	}
@@ -87,7 +92,7 @@ void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 // }
 void lll(const FString& TextToWrite)
 {
-	if (0)
+	if (nologgggggggg)
 	{
 		return;
 	}

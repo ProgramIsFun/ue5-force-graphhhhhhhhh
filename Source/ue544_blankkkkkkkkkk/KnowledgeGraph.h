@@ -49,7 +49,9 @@ public:
 	                       // const FOctreeNodeContext3 CurrentContext, FString node_id);
 	void tttttttttttt();
 
-
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	float LOGGGGGGGGG = false;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float alpha = 1;
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
