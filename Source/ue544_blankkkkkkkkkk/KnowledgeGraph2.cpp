@@ -957,26 +957,7 @@ void AKnowledgeGraph::AddNode1(int32 id, AKnowledgeNode* kn)
 
 void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 {
-	// Load the Blueprint
-	UBlueprint* LoadedBP = Cast<UBlueprint>(StaticLoadObject(
-			UBlueprint::StaticClass(),
-			nullptr,
-			TEXT("Blueprint'/Game/NewBlueprint22222.NewBlueprint22222'")
-		)
-	);
-	if (!LoadedBP)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Failed to load the Blueprint."));
-		eeeee();
-	}
-
-	// Check if the Blueprint class is valid
-	UClass* SpawnClass = LoadedBP->GeneratedClass;
-	if (!SpawnClass)
-	{
-		UE_LOG(LogTemp, Error, TEXT("Generated class from Blueprint is null."));
-		eeeee();
-	}
+	
 
 	// UObject* SpawnClass = Cast<UObject>(
 	// 	StaticLoadObject(UObject::StaticClass(),
@@ -986,8 +967,30 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 	// );
 	// UBlueprint* GeneratedObj = Cast<UBlueprint>(SpawnClass);
 	AKnowledgeEdge* e; 
-	if (1)
+	if (0)
 	{
+		// Load the Blueprint
+		UBlueprint* LoadedBP = Cast<UBlueprint>(StaticLoadObject(
+				UBlueprint::StaticClass(),
+				nullptr,
+				TEXT("Blueprint'/Game/NewBlueprint22222.NewBlueprint22222'")
+			)
+		);
+		if (!LoadedBP)
+		{
+			UE_LOG(LogTemp, Error, TEXT("Failed to load the Blueprint."));
+			eeeee();
+		}
+
+		// Check if the Blueprint class is valid
+		UClass* SpawnClass = LoadedBP->GeneratedClass;
+		if (!SpawnClass)
+		{
+			UE_LOG(LogTemp, Error, TEXT("Generated class from Blueprint is null."));
+			eeeee();
+		}
+
+		
 		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
 			SpawnClass
 		);

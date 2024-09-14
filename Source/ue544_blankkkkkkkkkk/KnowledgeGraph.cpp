@@ -70,6 +70,26 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	if(GEngine)
+	{
+		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
+	}
+	else
+	{
+		ll("Engine is not available for some reasonssssssssssssssssssssssss");
+		return;
+	}
+
+	
+	if (0)
+
+		
+	{
+		ll("TICK---------------------------------------------------"
+	 "-------------------------",2);
+		return;
+	}
+	
 	
 	iterations += 1;
 
@@ -82,6 +102,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 	if (1)
 	{
+		print("hi");
 		ll("TICK----------------------------------------------------------------------------"
 	 "----------------------------------------------------------------------------");
 		ll("alpha: " + FString::SanitizeFloat(alpha));
