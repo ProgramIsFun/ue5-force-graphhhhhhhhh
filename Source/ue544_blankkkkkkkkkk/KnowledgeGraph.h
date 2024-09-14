@@ -85,14 +85,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	// Use extremely small tick interval
-	bool use_tick_interval = true;
+	bool use_tick_interval = false;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float tick_interval = 0.9f;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int jnodes1 = 10;
+	int jnodes1 = 50;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int biasinitway=0;

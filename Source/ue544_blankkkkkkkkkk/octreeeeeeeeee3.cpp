@@ -168,7 +168,7 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 {
 	FVector aggregatePosition = FVector(0);
 	float aggregateStrength = 0.0;
-	int totalWeight = 0;
+	float totalWeight = 0;
 
 	if (IsLeaf())
 	{
@@ -208,8 +208,9 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 
 				if (
 
-					child->StrengthSet
+					child->StrengthSet || !child->IsLeaf()
 
+					
 				)
 				{
 					float c = FMath::Abs(child->Strength);
@@ -218,7 +219,8 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 
 
 					totalWeight += c;
-
+					ll("c: " + FString::SanitizeFloat(c));
+					ll("child->CenterOfMass: " + child->CenterOfMass.ToString());
 					aggregatePosition += c * child->CenterOfMass;
 				}
 			}
@@ -235,8 +237,11 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 			ll("aggregateStrength2222: " + FString::SanitizeFloat(aggregateStrength));
 			aggregateStrength *= sqrt(4.0 / 8);
 			ll("aggregateStrength: " + FString::SanitizeFloat(aggregateStrength));
+			ll("aggregatePosition: " + aggregatePosition.ToString());
+			ll("totalWeight: " + FString::SanitizeFloat(totalWeight));
+			ll("aggregatePosition / totalWeight: " + (aggregatePosition / totalWeight).ToString());
 			CenterOfMass = aggregatePosition / totalWeight;
-
+			ll("CenterOfMass: " + CenterOfMass.ToString());
 			Strength = aggregateStrength; // Optionally, adjust strength scaling here
 			// TotalWeight = totalWeight;
 		}
