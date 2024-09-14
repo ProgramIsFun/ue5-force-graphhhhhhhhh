@@ -47,6 +47,7 @@ void AAMyCustomCharacter::SpawnMyActor()
 	// Ensure a valid Actor Class is set to spawn before calling this function
 }
 
+
 void AAMyCustomCharacter::MoveForward(float Value)
 {
 	if ((Controller != nullptr) && (Value != 0.0f))
