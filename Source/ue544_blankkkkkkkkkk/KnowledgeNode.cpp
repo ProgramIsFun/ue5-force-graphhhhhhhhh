@@ -20,8 +20,10 @@ AKnowledgeNode::AKnowledgeNode()
     
     SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
     // SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-    RootComponent->SetupAttachment(SphereMesh);
+	SphereMesh->SetupAttachment(RootComponent);
 
+
+	
     static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
     SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
 
