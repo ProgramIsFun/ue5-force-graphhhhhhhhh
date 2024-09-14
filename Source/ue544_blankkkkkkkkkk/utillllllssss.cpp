@@ -22,6 +22,14 @@
 
 void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 {
+	if (1)
+	{
+		return;
+	}
+	else
+	{
+		
+	}
 	if (!StringToLog.IsEmpty())
 	{
 		FString LogMessage = Prefix + StringToLog; // Prepends a prefix to the original message
@@ -79,6 +87,14 @@ void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 // }
 void lll(const FString& TextToWrite)
 {
+	if (1)
+	{
+		return;
+	}
+	else
+	{
+		
+	}
 	if (0)
 	{
 		// Define the path to the log file.
