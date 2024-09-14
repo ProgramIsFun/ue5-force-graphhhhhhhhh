@@ -18,6 +18,15 @@ void AKnowledgeGraph::DoWork1()
 	{
 		int jid = i;
 		AKnowledgeNode* kn = GetWorld()->SpawnActor<AKnowledgeNode>();
+		if (kn)
+		{
+			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(kn->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+			if (PrimitiveComponent)
+			{
+				PrimitiveComponent->SetSimulatePhysics(false);
+				PrimitiveComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			}
+		}
 		AddNode1(jid, kn);
 	}
 
@@ -997,9 +1006,19 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 	}
 	else
 	{
+		
 		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
 		
 		);
+		if (e)
+		{
+			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(e->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+			if (PrimitiveComponent)
+			{
+				PrimitiveComponent->SetSimulatePhysics(false);
+				PrimitiveComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+			}
+		}
 	}
 
 

@@ -92,7 +92,7 @@ public:
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int jnodes1 = 2;
+	int jnodes1 = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int biasinitway=0;
