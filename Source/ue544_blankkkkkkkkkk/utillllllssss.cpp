@@ -22,7 +22,7 @@
 
 void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 {
-	if (1)
+	if (0)
 	{
 		return;
 	}
@@ -87,7 +87,7 @@ void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 // }
 void lll(const FString& TextToWrite)
 {
-	if (1)
+	if (0)
 	{
 		return;
 	}

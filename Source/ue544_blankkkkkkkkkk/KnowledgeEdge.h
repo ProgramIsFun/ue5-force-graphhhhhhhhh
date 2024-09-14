@@ -12,7 +12,7 @@
 // class FORCEGRAPH_API AKnowledgeEdge : public AActor
 
 UCLASS()
-class AKnowledgeEdge : public AActor
+class UE544_BLANKKKKKKKKKK_API AKnowledgeEdge : public AActor
 {
 	GENERATED_BODY()
 	
@@ -40,5 +40,8 @@ public:
     float bias;
     float strength;
     float distance;
+
+
+	UStaticMeshComponent * SphereMesh;
 
 };

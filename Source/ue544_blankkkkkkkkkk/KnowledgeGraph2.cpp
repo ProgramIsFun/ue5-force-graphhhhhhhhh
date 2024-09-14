@@ -985,10 +985,19 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 	// 	)
 	// );
 	// UBlueprint* GeneratedObj = Cast<UBlueprint>(SpawnClass);
-
-	AKnowledgeEdge* e = GetWorld()->SpawnActor<AKnowledgeEdge>(
-		SpawnClass
-	);
+	AKnowledgeEdge* e; 
+	if (0)
+	{
+		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
+			SpawnClass
+		);
+	}
+	else
+	{
+		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
+		
+		);
+	}
 
 
 	e->source = source;

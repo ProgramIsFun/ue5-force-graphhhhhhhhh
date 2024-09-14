@@ -19,7 +19,7 @@ struct ConnectedNode {
 // class FORCEGRAPH_API AKnowledgeNode : public AActor
 
 UCLASS()
-class AKnowledgeNode : public AActor
+class UE544_BLANKKKKKKKKKK_API AKnowledgeNode : public AActor
 {
     GENERATED_BODY()
     

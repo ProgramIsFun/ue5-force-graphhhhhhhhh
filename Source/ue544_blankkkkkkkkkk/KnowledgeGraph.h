@@ -20,7 +20,7 @@
 
 
 UCLASS()
-class AKnowledgeGraph : public AActor
+class UE544_BLANKKKKKKKKKK_API AKnowledgeGraph : public AActor
 {
 	GENERATED_BODY()
 

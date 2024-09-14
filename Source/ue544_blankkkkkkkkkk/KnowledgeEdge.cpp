@@ -14,6 +14,20 @@ AKnowledgeEdge::AKnowledgeEdge()
     MySphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Comp"));
     MySphere->SetHiddenInGame(false, true);
     RootComponent = MySphere;
+
+    SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
+    // SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+    SphereMesh->SetupAttachment(RootComponent);
+
+
+	
+    static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Cylinder.Cylinder'"));
+    SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
+
+
+
+
+    
     
 }
 
