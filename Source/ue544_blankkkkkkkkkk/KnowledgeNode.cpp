@@ -5,6 +5,8 @@
 
 #include "UObject/ConstructorHelpers.h"
 
+
+
 // Sets default values
 AKnowledgeNode::AKnowledgeNode()
 {
@@ -17,8 +19,8 @@ AKnowledgeNode::AKnowledgeNode()
     RootComponent = MySphere;
     
     SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
-    SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-    //RootComponent->SetupAttachment(SphereMesh);
+    // SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+    RootComponent->SetupAttachment(SphereMesh);
 
     static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
     SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
