@@ -142,15 +142,12 @@ FVector Jiggle(const FVector& Vec, float Magnitude)
 
 
 
-#if WITH_EDITOR
-#include "Editor.h"
 
 void eeeee()
 {
-	if (GEditor)
-	{
-		GEditor->EndPlayMap();
-	}
+	// if (GEditor)
+	// {
+	// 	GEditor->EndPlayMap();
+	// }
 
 }
-#endif

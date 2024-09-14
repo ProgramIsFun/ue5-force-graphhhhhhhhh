@@ -13,7 +13,7 @@ public class ue544_blankkkkkkkkkk : ModuleRules
 		PrivateDependencyModuleNames.AddRange(new string[]
 		{
 			
-			"UnrealEd"
+			// "UnrealEd"
 			
 		});
 
