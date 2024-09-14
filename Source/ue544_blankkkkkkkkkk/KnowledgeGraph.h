@@ -85,14 +85,14 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	// Use extremely small tick interval
-	bool use_tick_interval = false;
+	bool use_tick_interval = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	float tick_interval = 0.1f;
+	float tick_interval = 0.9f;
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int jnodes1 = 300;
+	int jnodes1 = 2;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int biasinitway=0;
@@ -105,7 +105,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	// Calculate many body force or not. 
-	bool manybody = false;
+	bool manybody = true;
 
 protected:
 	// Called when the game starts or when spawned
