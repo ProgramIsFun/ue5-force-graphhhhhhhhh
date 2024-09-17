@@ -102,7 +102,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 	if (1)
 	{
-		print("hi");
+		// print("hi");
 		ll("TICK----------------------------------------------------------------------------"
 	 "----------------------------------------------------------------------------");
 		ll("alpha: " + FString::SanitizeFloat(alpha));
@@ -123,10 +123,18 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 		for (auto& node : all_nodes)
 		{
 			auto kn = node.Value;
-			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-			ll("position: " + kn->GetActorLocation().ToString());
-			ll("velocity: " + kn->velocity.ToString());
-			
+
+
+			if (0)
+			{
+				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+				ll("position: " + kn->GetActorLocation().ToString());
+				ll("velocity: " + kn->velocity.ToString());
+			}
+			else
+			{
+				
+			}
 			
 			
 			
@@ -140,10 +148,16 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 			kn->SetActorLocation(
 				NewLocation
 			);
-			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-			ll("position: " + kn->GetActorLocation().ToString());
-			ll("velocity: " + kn->velocity.ToString());
-			
+			if (0)
+			{
+				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+				ll("position: " + kn->GetActorLocation().ToString());
+				ll("velocity: " + kn->velocity.ToString());
+			}
+			else
+			{
+				
+			}
 			
 
 			// kn->velocity *= 0; //reset velocities
