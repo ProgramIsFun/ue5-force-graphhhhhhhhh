@@ -77,9 +77,9 @@ DerivedDataCache/*
 
 
 .idea
-Config/DefaultEditorPerProjectUserSettings.ini
-Config/DefaultEngine.ini
-Config/DefaultInput.ini
+#Config/DefaultEditorPerProjectUserSettings.ini
+#Config/DefaultEngine.ini
+#Config/DefaultInput.ini
 
 
 Plugins/Developer/RiderLink
