@@ -20,7 +20,7 @@ struct ConnectedNode
 // class FORCEGRAPH_API AKnowledgeNode : public AActor
 
 UCLASS()
-class UE544_BLANKKKKKKKKKK_API AKnowledgeNode : public AActor
+class UE544_BLANKKKKKKKKKK_API AKnowledgeNode : public APawn
 {
 	GENERATED_BODY()
 
@@ -32,6 +32,12 @@ protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
 
+
+public:
+	void IncreaseTextSize();
+
+
+	
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
