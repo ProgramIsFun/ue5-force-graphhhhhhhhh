@@ -291,11 +291,14 @@ void AKnowledgeGraph::CalculatelinkAndatevelocity()
 		if (0)
 		{
 			if (target_node->id == 7 && alpha > 0.2)
+			{
 				ll("LINK VEL: " + (-1 * new_v * (1 - link.Value->bias)).ToString());
-
+			}
 
 			if (source_node->id == 7 && alpha > 0.2)
+			{
 				ll("LINK VEL: " + (new_v * (1 - link.Value->bias)).ToString());
+			}
 		}
 		else
 		{

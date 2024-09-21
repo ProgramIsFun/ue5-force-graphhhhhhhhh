@@ -3,6 +3,11 @@
 
 #include "KnowledgeNode.h"
 
+
+#define ENABLE_LOGGING 1
+#include "utillllllssss.h"
+
+
 #include "Components/TextRenderComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
@@ -52,12 +57,19 @@ void AKnowledgeNode::BeginPlay()
 }
 
 
-
+void AKnowledgeNode::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+	PlayerInputComponent->BindAction("IncreaseTextSizeeeeeeee", IE_Pressed, this, &AKnowledgeNode::IncreaseTextSize);
+}
 void AKnowledgeNode::IncreaseTextSize()
 {
-
-	float CurrentSize = TextComponent->WorldSize;
-	TextComponent->SetWorldSize(CurrentSize + 10.0f); // increase text size by 10.0
+	if (TextComponent)
+	{
+		ll("Increasing text size");
+		float CurrentSize = TextComponent->WorldSize;
+		TextComponent->SetWorldSize(CurrentSize + 10.0f); // Increase text size by 10 units
+	}
 
 }
 

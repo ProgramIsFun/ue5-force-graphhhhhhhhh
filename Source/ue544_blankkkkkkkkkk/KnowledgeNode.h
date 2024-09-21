@@ -35,6 +35,7 @@ protected:
 
 public:
 	void IncreaseTextSize();
+	virtual void SetupPlayerInputComponent(UInputComponent* PlayerInputComponent) override;
 
 
 	

@@ -23,8 +23,7 @@
 
 
 
-
-void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
+void ll3(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 {
 	bool nologgggggggg=true;
 
@@ -132,6 +131,72 @@ void lll(const FString& TextToWrite)
 		{
 			
 		}
+	}
+}
+
+
+void lll2(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
+{
+
+	bool nologgggggggg=false;
+
+	if (nologgggggggg)
+	{
+		return;
+	}
+	else
+	{
+		
+	}
+	if (!StringToLog.IsEmpty())
+	{
+	
+	
+		FString LogMessage = Prefix + StringToLog; // Prepends a prefix to the original message
+		// ELogVerbosity::Type LogLevel1;
+	
+	
+		if (0)
+		{
+			// Map SeverityLevel to ELogVerbosity
+			switch (SeverityLevel) 
+			{
+			case 1:
+			
+				UE_LOG(LogTemp, Warning, TEXT("%s"), *LogMessage);
+	
+				break;
+			case 2:
+				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);	
+				break;
+			default:
+				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
+				break;
+			}
+		}
+		else
+		{// Map SeverityLevel to ELogVerbosity
+			switch (SeverityLevel) 
+			{
+			case 1:
+			
+				UE_LOG(LogTemp, Warning, TEXT("%s"), *LogMessage);
+	
+				break;
+			case 2:
+				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);	
+				break;
+			default:
+				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
+				break;
+			}
+			if(GEngine)
+			{
+				GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, LogMessage);
+			}
+		}
+	
+		
 	}
 }
 

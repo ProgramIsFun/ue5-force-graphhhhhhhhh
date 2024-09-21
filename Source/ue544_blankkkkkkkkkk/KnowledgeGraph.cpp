@@ -5,7 +5,7 @@
 
 #include <random>
 
-
+#define ENABLE_LOGGING 1
 #include "utillllllssss.h"
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White,text)
 
@@ -110,7 +110,8 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 		if (alpha < alphaMin)
 		{
-			UE_LOG(LogTemp, Warning, TEXT("alpha is less than alphaMin"));
+			ll("alpha is less than alphaMin");
+			// UE_LOG(LogTemp, Warning, TEXT("alpha is less than alphaMin"));
 			return;
 		}
 
