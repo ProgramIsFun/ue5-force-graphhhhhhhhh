@@ -60,8 +60,8 @@ public:
 	float maxiterations = 1000000;
 	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	float alphaMin = 0.09;
-	// float alphaMin = 0.001;
+	float alphaMin = 0.001;
+	// float alphaMin = 0.09;
 
 
 

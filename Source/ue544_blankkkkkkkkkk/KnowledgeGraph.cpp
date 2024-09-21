@@ -13,7 +13,7 @@
 AKnowledgeGraph::AKnowledgeGraph()
 {
 	PrimaryActorTick.bCanEverTick = true;
-
+	alphaMin = 0.6f;
 
 }
 
