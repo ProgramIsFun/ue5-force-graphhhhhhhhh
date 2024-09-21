@@ -3,6 +3,7 @@
 
 #include "KnowledgeNode.h"
 
+#include "Components/TextRenderComponent.h"
 #include "UObject/ConstructorHelpers.h"
 
 
@@ -12,26 +13,45 @@ AKnowledgeNode::AKnowledgeNode()
 {
  	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
+
+
+    if (0)
+    {
+	    MySphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Comp"));
+	    MySphere->SetHiddenInGame(false, true);
+	    RootComponent = MySphere;
     
-    
-    MySphere = CreateDefaultSubobject<USphereComponent>(TEXT("Sphere Comp"));
-    MySphere->SetHiddenInGame(false, true);
-    RootComponent = MySphere;
-    
-    SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
-    // SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
-	SphereMesh->SetupAttachment(RootComponent);
+	    SphereMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("SphereMesh"));
+	    // SphereMesh->AttachToComponent(GetRootComponent(), FAttachmentTransformRules::SnapToTargetNotIncludingScale);
+	    SphereMesh->SetupAttachment(RootComponent);
 
 
 	
-    static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
-    SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
+	    static ConstructorHelpers::FObjectFinder<UStaticMesh>SphereMeshAsset(TEXT("StaticMesh'/Engine/BasicShapes/Sphere.Sphere'"));
+	    SphereMesh->SetStaticMesh(SphereMeshAsset.Object);
 
 
 
-	float Scale = 0.2;
-    SphereMesh->SetWorldScale3D(FVector(Scale, Scale, Scale));
+	    float Scale = 0.2;
+	    SphereMesh->SetWorldScale3D(FVector(Scale, Scale, Scale));
+    }
+    else
+    {
+    	TextComponent = CreateDefaultSubobject<UTextRenderComponent>(TEXT("TextRenderComponent"));
+    	RootComponent = TextComponent;
 
+    	// Configure the default text settings
+    	TextComponent->SetText(FText::FromString(TEXT("Hello, World!")));
+    	TextComponent->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
+    	TextComponent->SetWorldSize(50.f);
+
+    }
+
+
+
+
+
+	
 }
 
 // Called when the game starts or when spawned
