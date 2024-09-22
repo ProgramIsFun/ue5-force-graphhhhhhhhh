@@ -79,7 +79,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 	if(GEngine)
 	{
-		GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
+		// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
 	}
 	else
 	{
