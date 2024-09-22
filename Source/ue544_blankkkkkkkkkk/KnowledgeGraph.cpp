@@ -5,7 +5,7 @@
 
 #include <random>
 
-#define ENABLE_LOGGING 1
+// #define ENABLE_LOGGING 1
 #include "utillllllssss.h"
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White,text)
 
@@ -13,7 +13,14 @@
 AKnowledgeGraph::AKnowledgeGraph()
 {
 	PrimaryActorTick.bCanEverTick = true;
-	alphaMin = 0.6f;
+	if (0)
+	{
+		alphaMin = 0.6f;
+	}
+	else
+	{
+		
+	}
 
 }
 
@@ -81,14 +88,6 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 	}
 
 	
-	if (0)
-
-		
-	{
-		ll("TICK---------------------------------------------------"
-	 "-------------------------",2);
-		return;
-	}
 	
 	
 	iterations += 1;
