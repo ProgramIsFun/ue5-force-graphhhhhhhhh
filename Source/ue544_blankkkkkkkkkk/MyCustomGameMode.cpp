@@ -33,6 +33,7 @@ AMyCustomGameMode::AMyCustomGameMode()
 	else
 	{
 		ll("DefaultPawnClass Will set in child blueprint");
+		ll("Default game mode in the project settings will point to that child blueprint. ");
 	}
 
 
