@@ -20,7 +20,8 @@ void AKnowledgeGraph::DoWork1()
 		AKnowledgeNode* kn = GetWorld()->SpawnActor<AKnowledgeNode>();
 		if (kn)
 		{
-			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(kn->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(
+				kn->GetComponentByClass(UPrimitiveComponent::StaticClass()));
 			if (PrimitiveComponent)
 			{
 				PrimitiveComponent->SetSimulatePhysics(false);
@@ -969,8 +970,6 @@ void AKnowledgeGraph::AddNode1(int32 id, AKnowledgeNode* kn)
 
 void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 {
-	
-
 	// UObject* SpawnClass = Cast<UObject>(
 	// 	StaticLoadObject(UObject::StaticClass(),
 	// 	                 NULL,
@@ -978,15 +977,14 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 	// 	)
 	// );
 	// UBlueprint* GeneratedObj = Cast<UBlueprint>(SpawnClass);
-	AKnowledgeEdge* e; 
+	AKnowledgeEdge* e;
 	if (1)
 	{
-
 		UClass* bpClass;
 		if (0)
 		{
-			
-			static ConstructorHelpers::FObjectFinder<UClass> bpClassFinder(TEXT("Class'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222_C'"));
+			static ConstructorHelpers::FObjectFinder<UClass> bpClassFinder(
+				TEXT("Class'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222_C'"));
 			if (bpClassFinder.Object)
 			{
 				bpClass = bpClassFinder.Object;
@@ -994,21 +992,18 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 			else
 			{
 				bpClass = bpClassFinder.Object;
-				
 			}
 		}
 		else
 		{
-			
-		
 			// Load the Blueprint
 			UBlueprint* LoadedBP = Cast<UBlueprint>(StaticLoadObject(
 					UBlueprint::StaticClass(),
 					nullptr,
 					TEXT(
 						// "Blueprint'/Game/NewBlueprint22222.NewBlueprint22222'"
-	"Blueprint'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222'"
-						)
+						"Blueprint'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222'"
+					)
 				)
 			);
 			if (!LoadedBP)
@@ -1024,25 +1019,22 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 				UE_LOG(LogTemp, Error, TEXT("Generated class from Blueprint is null."));
 				eeeee();
 			}
-
 		}
 
 
-
-		
 		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
 			bpClass
 		);
 	}
 	else
 	{
-		
 		e = GetWorld()->SpawnActor<AKnowledgeEdge>(
-		
+
 		);
 		if (e)
 		{
-			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(e->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(
+				e->GetComponentByClass(UPrimitiveComponent::StaticClass()));
 			if (PrimitiveComponent)
 			{
 				PrimitiveComponent->SetSimulatePhysics(false);
