@@ -11,7 +11,31 @@
 
 AMyCustomGameMode::AMyCustomGameMode()
 {
-	// DefaultPawnClass = AAMyCustomCharacter::StaticClass();
-	DefaultPawnClass = ADefaultPawn::StaticClass();
+	if (0)
+	{
+		// DefaultPawnClass = AAMyCustomCharacter::StaticClass();
+		if (0)
+		{
+			DefaultPawnClass = ADefaultPawn::StaticClass();
+		}
+		else
+		{
+			static ConstructorHelpers::FClassFinder<APawn> PlayerPawnClassFinder(
+				TEXT("/Script/Engine.Blueprint'/Game/defaultpawnextendddddd.defaultpawnextendddddd_C'")
+
+
+
+			
+			);
+			DefaultPawnClass = PlayerPawnClassFinder.Class;
+		}
+	}
+	else
+	{
+		ll("DefaultPawnClass Will set in child blueprint");
+	}
+
+
+
 	// ll("default pawn class"+DefaultPawnClass->GetName(), 2);
 }

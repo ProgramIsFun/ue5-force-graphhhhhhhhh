@@ -16,4 +16,7 @@ class UE544_BLANKKKKKKKKKK_API AMyCustomGameMode : public AGameModeBase
 public:
 	AMyCustomGameMode();
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Classes)
+	bool ttttttttttttttttttttttttttttttttttttttttttttttttttttttt=true;
+
 };
