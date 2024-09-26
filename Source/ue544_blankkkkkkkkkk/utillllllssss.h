@@ -8,6 +8,8 @@
 #define ENABLE_LOGGING 0
 #endif
 
+
+
 #if ENABLE_LOGGING
 #define ll(StringToLog, ...) lll2(StringToLog, ##__VA_ARGS__)
 #else
@@ -19,7 +21,7 @@
 
 // Declare the function
 // void ll(const FString& StringToLog);
-void ll3(const FString& StringToLog, int SeverityLevel = 0, const FString& Prefix = TEXT("[Info]"));
+// void ll3(const FString& StringToLog, int SeverityLevel = 0, const FString& Prefix = TEXT("[Info]"));
 // void lll(const std::string& LogMessage);
 
 
