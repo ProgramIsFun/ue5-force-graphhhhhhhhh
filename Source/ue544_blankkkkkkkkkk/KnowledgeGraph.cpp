@@ -19,9 +19,7 @@ AKnowledgeGraph::AKnowledgeGraph()
 	}
 	else
 	{
-		
 	}
-
 }
 
 AKnowledgeGraph::~AKnowledgeGraph()
@@ -40,7 +38,6 @@ void AKnowledgeGraph::BeginPlay()
 	if (use_tick_interval)
 	{
 		PrimaryActorTick.TickInterval = tick_interval;
-		
 	}
 
 
@@ -54,14 +51,11 @@ void AKnowledgeGraph::BeginPlay()
 	}
 	else
 	{
-		
 	}
 
 
 	DoWork2();
 
-
-	
 
 	if (!init)
 	{
@@ -77,7 +71,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
-	if(GEngine)
+	if (GEngine)
 	{
 		// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
 	}
@@ -87,9 +81,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 		return;
 	}
 
-	
-	
-	
+
 	iterations += 1;
 
 
@@ -103,7 +95,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 	{
 		// print("hi");
 		ll("TICK----------------------------------------------------------------------------"
-	 "----------------------------------------------------------------------------");
+			"----------------------------------------------------------------------------");
 		ll("alpha: " + FString::SanitizeFloat(alpha));
 		ll("iterations: " + FString::FromInt(iterations));
 
@@ -133,15 +125,11 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 			}
 			else
 			{
-				
 			}
-			
-			
-			
+
+
 			kn->velocity *= velocityDecay;
 
-
-			
 
 			FVector NewLocation = kn->GetActorLocation() + kn->velocity;
 
@@ -156,9 +144,8 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 			}
 			else
 			{
-				
 			}
-			
+
 
 			// kn->velocity *= 0; //reset velocities
 
@@ -177,8 +164,6 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 				all_nodes[l->target]->GetActorLocation()
 			);
 		}
-
-		
 	}
 	else
 	{
