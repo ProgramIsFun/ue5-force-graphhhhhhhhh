@@ -406,25 +406,8 @@ void AKnowledgeGraph::Calculatechargeforceandupdatevelocity()
 	}
 }
 
-void AKnowledgeGraph::ApplyForces()
+void AKnowledgeGraph::ApplyCenterforceandmovedirectly()
 {
-	// In here velocity of all notes are zeroed
-	// In the following for loop, In the first few loop, the velocity is 0. 
-
-	ll("Ready to calculate link.--------------------------------------");
-	CalculatelinkAndatevelocity();
-	ll("Finish calculating link.--------------------------------------");
-	if (manybody)
-	{
-		ll("Ready to calculate charge.--------------------------------------");
-
-		Calculatechargeforceandupdatevelocity();
-		ll("Finish calculating charge.--------------------------------------");
-	}
-	else
-	{
-	}
-
 	// Following is javascript implementation of Center Force
 	// for (i = 0; i < n; ++i) {
 	// 	node = nodes[i],
@@ -463,6 +446,28 @@ void AKnowledgeGraph::ApplyForces()
 			node.Value->GetActorLocation() - (aggregation / all_nodes.Num() - center) * 1
 		);
 	}
+}
+
+void AKnowledgeGraph::ApplyForces()
+{
+	// In here velocity of all notes are zeroed
+	// In the following for loop, In the first few loop, the velocity is 0. 
+
+	ll("Ready to calculate link.--------------------------------------");
+	CalculatelinkAndatevelocity();
+	ll("Finish calculating link.--------------------------------------");
+	if (manybody)
+	{
+		ll("Ready to calculate charge.--------------------------------------");
+
+		Calculatechargeforceandupdatevelocity();
+		ll("Finish calculating charge.--------------------------------------");
+	}
+	else
+	{
+	}
+
+	ApplyCenterforceandmovedirectly();
 }
 
 // NodeStrength AKnowledgeGraph::AddUpChildren(
