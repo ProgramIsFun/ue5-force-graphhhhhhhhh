@@ -61,8 +61,8 @@ In the beginplay function, we will initialize everything that we need.
 
 In the tick function, we will update the position of the nodes and the links.
 
+So how to put this in the map that we want to play? We can drag the KnowledgeGraph From the content browser to the map in the middle. And then you see the actor is in the map, because you can look at the right hand side. There is a level editor. And you can see the actor in the world outliner.
 
-
-
+![image](https://github.com/user-attachments/assets/2042450f-0d52-4c6f-97e2-a8dc2973de14)
 
 
