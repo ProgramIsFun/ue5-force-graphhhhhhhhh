@@ -21,7 +21,11 @@ It is worse in the following ways
 1. The implementation of the charge force, which is the many body force, use a custom implementation of the OCtree, Which seems to be slower than the library version of the unreal engine.
 
 
+## to do list
 
+- [] The rendering part is very laggy when the number of nodes reach 100. 
+  - Need to time the exact time you should buy each function in order to find the bottleneck. 
+- [] Adding functions such as import graph or export graph in a Json format. 
 
 ## A shot introduction to unreal engine 5
 
