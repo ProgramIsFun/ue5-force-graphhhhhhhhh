@@ -43,7 +43,7 @@ Choosing the right class depends on the functionality you need and how you plan 
 
 2. Where to put the source code? 
 
-The source code should be put in the source folder of the project. In a lot of complicated projects, they want to separate the header files and the source files. In this case, you can put the header files in the include folder and the source files Into two different directories in the source folder. 
+The source code should be put in the source folder of the project. In a lot of complicated projects, they want to separate the header files and the source files Into two different directories in the source folder. 
 
 But in this project, there is no such separations. All the header files and CPP are put in the same folder. 
 
