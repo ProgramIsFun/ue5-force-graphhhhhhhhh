@@ -66,3 +66,8 @@ So how to put this in the map that we want to play? We can drag the KnowledgeGra
 ![image](https://github.com/user-attachments/assets/2042450f-0d52-4c6f-97e2-a8dc2973de14)
 
 
+4. How to open different maps? 
+
+You can open different maps by clicking the file in the content browser.
+
+Content/CreatePlanetsSSS/NewMapPPPPPPP.umap   is the map that looks like in the universe. 
