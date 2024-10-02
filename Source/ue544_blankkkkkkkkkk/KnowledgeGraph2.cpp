@@ -988,7 +988,6 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 		UClass* bpClass;
 		if (0)
 		{
-		
 		}
 		else
 		{
@@ -997,15 +996,14 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 
 			if (1)
 			{
-
 				// This approach works in both play and editor and package game. 
-				
+
 				UClass* loadedClass = StaticLoadClass(UObject::StaticClass(), nullptr,
 				                                      TEXT(
 					                                      // "Blueprint'/Game/Characters/Enemies/BP_LitchBoss1.BP_LitchBoss1_C'"
 					                                      "Blueprint'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222_C'"
 
-					                                      ));
+				                                      ));
 				if (loadedClass)
 				{
 					e = GetWorld()->SpawnActor<AKnowledgeEdge>(loadedClass);
@@ -1015,7 +1013,7 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 				{
 					ll("error loading classsssssssssssssssssssssss");
 
-					e= GetWorld()->SpawnActor<AKnowledgeEdge>(
+					e = GetWorld()->SpawnActor<AKnowledgeEdge>(
 						AKnowledgeEdge::StaticClass()
 					);
 					// GEngine->AddOnScreenDebugMessage(-1, 4, FColor::Red, "error loading class");
@@ -1023,10 +1021,9 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 			}
 			else
 			{
-
 				// This approach works in Only play in editor
 
-				
+
 				// Load the Blueprint
 				UBlueprint* LoadedBP = Cast<UBlueprint>(StaticLoadObject(
 						UBlueprint::StaticClass(),
@@ -1058,7 +1055,6 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 	}
 	else
 	{
-		
 	}
 
 
