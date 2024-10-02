@@ -29,7 +29,7 @@ public:
 	~AKnowledgeGraph();
 	void GenerateConnectedGraph(int32 NumClusters, int32 NodesPerCluster);
 	void CalculatelinkAndatevelocity();
-	void Calculatechargeforceandupdatevelocity();
+	void calculate_charge_force_and_update_velocity();
 	void apply_center_force_and_move_the_node_directly();
 	void generateGraph();
 	void defaultGenerateGraphMethod();

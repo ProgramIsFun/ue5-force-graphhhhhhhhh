@@ -309,7 +309,7 @@ void AKnowledgeGraph::CalculatelinkAndatevelocity()
 	}
 }
 
-void AKnowledgeGraph::Calculatechargeforceandupdatevelocity()
+void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 {
 	if (1)
 	{
@@ -460,7 +460,7 @@ void AKnowledgeGraph::ApplyForces()
 	{
 		ll("Ready to calculate charge.--------------------------------------");
 
-		Calculatechargeforceandupdatevelocity();
+		calculate_charge_force_and_update_velocity();
 		ll("Finish calculating charge.--------------------------------------");
 	}
 	else
