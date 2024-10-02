@@ -22,9 +22,7 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
   - Need to time the exact time each function in order to find the bottleneck
   - Use the profiler to find the bottleneck
 
-
-
-
+  
 ### Adding functions such as import graph or export graph in a Json format. 
 
 ## A shot introduction to unreal engine 5
