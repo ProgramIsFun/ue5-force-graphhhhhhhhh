@@ -126,8 +126,7 @@ void AKnowledgeGraph::update_link_position()
 	for (auto& link : all_links)
 	{
 		auto l = link.Value;
-		//            print("LOCCCCCC");
-		//            print(all_nodes[l->source]->GetActorLocation().ToString());
+		
 		l->ChangeLoc(
 			all_nodes[l->source]->GetActorLocation(),
 			all_nodes[l->target]->GetActorLocation()
