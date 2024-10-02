@@ -68,6 +68,17 @@ You can open different maps by clicking the file in the content browser.
 
 Content/CreatePlanetsSSS/NewMapPPPPPPP.umap   is the map that looks like in the universe. 
 
+5.Usual workflow
+
+Every time we modify the source code, we need to recompile the project.
+
+Because sometimes we want to change the default values of some member variables of some class, 
+In order to speed up the workflow, we can add a UPROPERTY() macro in front of the member variable.
+
+
+
+```cpp 
+
 
 
 ## Reference
