@@ -67,6 +67,74 @@ void AKnowledgeGraph::BeginPlay()
 }
 
 
+void AKnowledgeGraph::update_actor_location_based_on_velocity()
+{
+	for (auto& node : all_nodes)
+	{
+		auto kn = node.Value;
+
+
+		if (0)
+		{
+			ll("POSITION! node: " + FString::FromInt(node.Key));
+			ll("position: " + kn->GetActorLocation().ToString());
+			ll("velocity: " + kn->velocity.ToString());
+		}
+		else
+		{
+		}
+
+
+		kn->velocity *= velocityDecay;
+
+
+		FVector NewLocation = kn->GetActorLocation() + kn->velocity;
+
+		kn->SetActorLocation(
+			NewLocation
+		);
+		if (0)
+		{
+			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+			ll("position: " + kn->GetActorLocation().ToString());
+			ll("velocity: " + kn->velocity.ToString());
+		}
+		else
+		{
+		}
+
+
+		if (0)
+		{
+			kn->velocity *= 0; //reset velocities
+		}
+
+		if (0)
+		{
+			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+			ll("position: " + kn->GetActorLocation().ToString());
+			ll("velocity: " + kn->velocity.ToString());
+		}
+		else
+		{
+		}
+	}
+}
+
+void AKnowledgeGraph::update_link_position()
+{
+	for (auto& link : all_links)
+	{
+		auto l = link.Value;
+		//            print("LOCCCCCC");
+		//            print(all_nodes[l->source]->GetActorLocation().ToString());
+		l->ChangeLoc(
+			all_nodes[l->source]->GetActorLocation(),
+			all_nodes[l->target]->GetActorLocation()
+		);
+	}
+}
+
 void AKnowledgeGraph::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
@@ -112,67 +180,9 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 		ApplyForces();
 
-		for (auto& node : all_nodes)
-		{
-			auto kn = node.Value;
+		update_actor_location_based_on_velocity();
 
-
-			if (0)
-			{
-				ll("POSITION! node: " + FString::FromInt(node.Key));
-				ll("position: " + kn->GetActorLocation().ToString());
-				ll("velocity: " + kn->velocity.ToString());
-			}
-			else
-			{
-			}
-
-
-			kn->velocity *= velocityDecay;
-
-
-			FVector NewLocation = kn->GetActorLocation() + kn->velocity;
-
-			kn->SetActorLocation(
-				NewLocation
-			);
-			if (0)
-			{
-				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-				ll("position: " + kn->GetActorLocation().ToString());
-				ll("velocity: " + kn->velocity.ToString());
-			}
-			else
-			{
-			}
-
-
-			if (0)
-			{
-				kn->velocity *= 0; //reset velocities
-			}
-
-			if (0)
-			{
-				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-				ll("position: " + kn->GetActorLocation().ToString());
-				ll("velocity: " + kn->velocity.ToString());
-			}
-			else
-			{
-			}
-		}
-
-		for (auto& link : all_links)
-		{
-			auto l = link.Value;
-			//            print("LOCCCCCC");
-			//            print(all_nodes[l->source]->GetActorLocation().ToString());
-			l->ChangeLoc(
-				all_nodes[l->source]->GetActorLocation(),
-				all_nodes[l->target]->GetActorLocation()
-			);
-		}
+		update_link_position();
 	}
 	else
 	{
