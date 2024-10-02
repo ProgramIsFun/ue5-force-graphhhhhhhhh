@@ -17,9 +17,10 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 
 ### The rendering part is very laggy when the number of nodes reach 100.  Speed up the rendering part and make it less laggy. 
 
-Possible solution 
+- Possible solution
+  - Need to time the exact time each function in order to find the bottleneck
+  - Use the profiler to find the bottleneck
 
-Need to time the exact time each function in order to find the bottleneck.
 
 
 
