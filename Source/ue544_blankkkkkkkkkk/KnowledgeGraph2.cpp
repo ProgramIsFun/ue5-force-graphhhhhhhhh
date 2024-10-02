@@ -235,7 +235,7 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 	// After loop, the velocity of all notes have been altered a little bit because of the link force already. 
 	for (auto& link : all_links)
 	{
-		ll("ApplyForcesssssssssssssssssssss Index: " + FString::FromInt(Index));
+		ll("ApplyForcesssssssssssssssssssss Index: " + FString::FromInt(Index), log);
 		auto source_node = all_nodes[link.Value->source];
 		auto target_node = all_nodes[link.Value->target];
 
@@ -287,6 +287,7 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 			" -> " + target_node->velocity.ToString(), log);
 
 
+		
 		// Record source original velocity.
 		FVector source_original_velocity = source_node->velocity;
 

@@ -159,6 +159,7 @@ FVector Jiggle(const FVector& Vec, float Magnitude)
 	}
 	else
 	{
+		
 		return Vec;
 	}
 
