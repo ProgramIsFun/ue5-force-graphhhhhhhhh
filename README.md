@@ -47,7 +47,7 @@ The source code should be put in the source folder of the project. In a lot of c
 
 But in this project, there is no such separations. All the header files and CPP are put in the same folder. 
 
-3.How does the force directed graph work?
+3.How is this project implementing force directed graph work in unreal engine 5?
 
 Basically, it is a cpp class  and it inherits from the Pawns class.  
 
