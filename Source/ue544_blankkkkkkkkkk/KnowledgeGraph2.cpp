@@ -781,7 +781,7 @@ void AKnowledgeGraph::tttttttttttt()
 // 	OctreeData->AddElement(inNewOctreeElement);
 // }
 
-void AKnowledgeGraph::InitNodes()
+void AKnowledgeGraph::initializeNodePosition()
 {
 	if (0)
 	{

@@ -59,7 +59,7 @@ void AKnowledgeGraph::BeginPlay()
 
 	if (!init)
 	{
-		InitNodes();
+		initializeNodePosition();
 
 
 		CalculateBiasstrengthOflinks();

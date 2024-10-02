@@ -38,7 +38,7 @@ public:
 	// void AddNode(int32 id, AKnowledgeNode* kn, FVector location);
 	void AddEdge(int32 id, int32 source, int32 target);
 	// void AddOctreeElement(const FOctreeElement& inNewOctreeElement);
-	void InitNodes();
+	void initializeNodePosition();
 	// void InitOctree(const FBox& inNewBounds);
 	void CalculateBiasstrengthOflinks();
 	// void RemoveElement(int key);
@@ -49,7 +49,7 @@ public:
 	// void FindManyBodyForce(AKnowledgeNode* kn, const FSimpleOctree::FNode& node,
 	                       // const FOctreeNodeContext3 CurrentContext, FString node_id);
 	void tttttttttttt();
-
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float LOGGGGGGGGG = false;
 	
