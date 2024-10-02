@@ -62,8 +62,13 @@ void lll(const FString& TextToWrite)
 }
 
 
-void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
+void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& Prefix)
 {
+	if (!LOG)
+	{
+		return;
+	}
+	
 
 	bool nologgggggggg=false;
 
@@ -88,10 +93,12 @@ void ll(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 			// Map SeverityLevel to ELogVerbosity
 			switch (SeverityLevel) 
 			{
+
+			case 0:
+				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
+				break;
 			case 1:
-			
 				UE_LOG(LogTemp, Warning, TEXT("%s"), *LogMessage);
-	
 				break;
 			case 2:
 				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);	
