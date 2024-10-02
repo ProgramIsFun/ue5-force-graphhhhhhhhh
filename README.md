@@ -37,13 +37,13 @@ Actors: Actors are the most general class and should be used for non-controlled 
 
 Choosing the right class depends on the functionality you need and how you plan to interact with the object in your game.
 
-2. Where to put the source code? 
+2.Where to put the source code? 
 
 The source code should be put in the source folder of the project. In a lot of complicated projects, they want to separate the header files and the source files Into two different directories in the source folder. 
 
 But in this project, there is no such separations. All the header files and CPP are put in the same folder. 
 
-3. How does the force directed graph work?
+3.How does the force directed graph work?
 
 Basically, it is a cpp class  and it inherits from the Pawns class.  
 
@@ -62,7 +62,7 @@ So how to put this in the map that we want to play? We can drag the KnowledgeGra
 ![image](https://github.com/user-attachments/assets/2042450f-0d52-4c6f-97e2-a8dc2973de14)
 
 
-4. How to open different maps? 
+4.How to open different maps? 
 
 You can open different maps by clicking the file in the content browser.
 
