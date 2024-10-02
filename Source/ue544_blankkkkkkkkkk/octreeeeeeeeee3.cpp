@@ -132,7 +132,6 @@ void AddDataPoint(OctreeNode* node, AKnowledgeNode* kn)
 			node->TotalDataPoints = 1; // Now properly accounting for the node having new data
 
 			// All the 8 pointers of children's property Should still be nullptr.
-
 		}
 	}
 }
@@ -302,8 +301,7 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 {
 	bool log = true;
 
-	
-	
+
 	// return;
 	if (!root) return; // If the root is null, return immediately
 
@@ -312,7 +310,6 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 	Stack1.push(root);
 	while (!Stack1.empty())
 	{
-
 		OctreeNode* currentNode = Stack1.top();
 		Stack1.pop();
 
@@ -358,11 +355,10 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 {
 	bool log = true;
 	ll("-----------------", log);
-	ll("SampleCallback",log);
-	
+	ll("SampleCallback", log);
+
 	if (0)
 	{
-		
 	}
 	else
 	{
@@ -440,7 +436,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 				ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
 				ll("alpha: " + FString::SanitizeFloat(alpha), log);
 				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->
-					velocity.ToString(), log);
+				   velocity.ToString(), log);
 
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
 				kn->velocity += Vector / l;
@@ -480,14 +476,14 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		if (node->Data == nullptr)
 
 		{
-			ll("Data is null", log);
+			ll("Data is null", log,2);
 			return true;
 		}
 		else
 		{
 			if (node->Data->Node == nullptr)
 			{
-				ll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.", log);
+				ll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.", log,2);
 			}
 			else
 			{
