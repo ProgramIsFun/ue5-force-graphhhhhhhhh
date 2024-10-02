@@ -30,7 +30,8 @@ OctreeNode::OctreeNode()
 
 OctreeNode::~OctreeNode()
 {
-	for (auto child : Children) {
+	for (auto child : Children)
+	{
 		delete child;
 	}
 	Children.Empty(); // Clear the TArray, not strictly necessary since the node is being destroyed
@@ -39,7 +40,8 @@ OctreeNode::~OctreeNode()
 	PointData* current = Data;
 	if (0)
 	{
-		while (current != nullptr) {
+		while (current != nullptr)
+		{
 			delete current;
 			PointData* next = current->Next;
 			current = next;
@@ -50,7 +52,6 @@ OctreeNode::~OctreeNode()
 		delete current;
 	}
 	Data = nullptr; // Reset pointer to nullptr after deletion
-
 }
 
 bool OctreeNode::IsLeaf() const
@@ -166,85 +167,93 @@ void OctreeNode::CalculateCenterOfMass()
 
 void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 {
-	FVector aggregatePosition = FVector(0);
-	float aggregateStrength = 0.0;
-	float totalWeight = 0;
-
-	if (IsLeaf())
+	if (1)
 	{
-		if (Data)
+		FVector aggregatePosition = FVector(0);
+		float aggregateStrength = 0.0;
+		float totalWeight = 0;
+
+		if (IsLeaf())
 		{
-			FVector position = Data->Node->GetActorLocation();
-			double strength = Data->Node->strength;
+			if (Data)
+			{
+				FVector position = Data->Node->GetActorLocation();
+				double strength = Data->Node->strength;
 
-			ll("strength555555555: " + FString::SanitizeFloat(strength));
-			Strength = strength;
-			StrengthSet = true;
+				ll("strength555555555: " + FString::SanitizeFloat(strength));
+				Strength = strength;
+				StrengthSet = true;
 
-			// TotalWeight = FMath::Abs(strength);
+				// TotalWeight = FMath::Abs(strength);
 
 
-			// In javascript implementations,
-			// we extract the value of that node and assign directly xyz property  
-			CenterOfMass = position; // Assign directly for leaf nodes
+				// In javascript implementations,
+				// we extract the value of that node and assign directly xyz property  
+				CenterOfMass = position; // Assign directly for leaf nodes
+			}
+			else
+			{
+				// If no data is associated with this Leave node, we will never record the total weight and strength.
+				// StrengthSet=false;
+			}
 		}
 		else
 		{
-			// If no data is associated with this Leave node, we will never record the total weight and strength.
-			// StrengthSet=false;
+			// Recursive accumulation from children nodes
+			for (OctreeNode* child : Children)
+			{
+				if (
+					child != nullptr
+				)
+				{
+					child->AccumulateStrengthAndComputeCenterOfMass();
+
+
+					if (
+
+						child->StrengthSet || !child->IsLeaf()
+
+
+					)
+					{
+						float c = FMath::Abs(child->Strength);
+
+						aggregateStrength += child->Strength;
+
+
+						totalWeight += c;
+						ll("c: " + FString::SanitizeFloat(c));
+						ll("child->CenterOfMass: " + child->CenterOfMass.ToString());
+						aggregatePosition += c * child->CenterOfMass;
+					}
+				}
+				else
+				{
+					// Should never happens here,
+					// because if this is not a leaf note, all the child should not be an empty pointer. 
+				}
+			}
+
+			// Calculate the center of mass based on total weight
+			if (totalWeight > 0)
+			{
+				ll("aggregateStrength2222: " + FString::SanitizeFloat(aggregateStrength));
+				aggregateStrength *= sqrt(4.0 / 8);
+				ll("aggregateStrength: " + FString::SanitizeFloat(aggregateStrength));
+				ll("aggregatePosition: " + aggregatePosition.ToString());
+				ll("totalWeight: " + FString::SanitizeFloat(totalWeight));
+				ll("aggregatePosition / totalWeight: " + (aggregatePosition / totalWeight).ToString());
+				CenterOfMass = aggregatePosition / totalWeight;
+				ll("CenterOfMass: " + CenterOfMass.ToString());
+				Strength = aggregateStrength; // Optionally, adjust strength scaling here
+				// TotalWeight = totalWeight;
+			}
 		}
 	}
 	else
 	{
-		// Recursive accumulation from children nodes
-		for (OctreeNode* child : Children)
-		{
-			if (
-				child != nullptr
-			)
-			{
-				child->AccumulateStrengthAndComputeCenterOfMass();
-
-
-				if (
-
-					child->StrengthSet || !child->IsLeaf()
-
-					
-				)
-				{
-					float c = FMath::Abs(child->Strength);
-
-					aggregateStrength += child->Strength;
-
-
-					totalWeight += c;
-					ll("c: " + FString::SanitizeFloat(c));
-					ll("child->CenterOfMass: " + child->CenterOfMass.ToString());
-					aggregatePosition += c * child->CenterOfMass;
-				}
-			}
-			else
-			{
-				// Should never happens here,
-				// because if this is not a leaf note, all the child should not be an empty pointer. 
-			}
-		}
-
-		// Calculate the center of mass based on total weight
-		if (totalWeight > 0)
-		{
-			ll("aggregateStrength2222: " + FString::SanitizeFloat(aggregateStrength));
-			aggregateStrength *= sqrt(4.0 / 8);
-			ll("aggregateStrength: " + FString::SanitizeFloat(aggregateStrength));
-			ll("aggregatePosition: " + aggregatePosition.ToString());
-			ll("totalWeight: " + FString::SanitizeFloat(totalWeight));
-			ll("aggregatePosition / totalWeight: " + (aggregatePosition / totalWeight).ToString());
-			CenterOfMass = aggregatePosition / totalWeight;
-			ll("CenterOfMass: " + CenterOfMass.ToString());
-			Strength = aggregateStrength; // Optionally, adjust strength scaling here
-			// TotalWeight = totalWeight;
-		}
+		// Instead of using recursion, we will traverse the tree using bfs and record the path, And then we will calculate center of mass based on the Reverse order.
+		
 	}
 }
 
@@ -334,15 +343,13 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 				OctreeNode* child = currentNode->Children[i];
 				if (child)
 				{
-					if(child->Data||!child->IsLeaf())
+					if (child->Data || !child->IsLeaf())
 					{
 						nodeQueue.push(child);
 					}
 				}
-			}	
+			}
 		}
-
-		
 	}
 }
 
@@ -376,7 +383,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 
 		FVector dir = node->CenterOfMass - kn->GetActorLocation();
 
-	
+
 		// Remember that direction is the sum of all the Actor locations of the elements in that note. 
 		float l = dir.Size() * dir.Size();
 
@@ -393,7 +400,6 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2));
 
 
-		
 		// if size of current box is less than distance between nodes
 		// This is used to stop recurring down the tree.
 		if (width.X * width.X / theta2 < l)
@@ -427,20 +433,16 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 				}
 				else
 				{
-					
 				}
 
 
-
-
-				
 				if (l < distancemin)
 					l = sqrt(distancemin * l);
-				
+
 
 				//print(FString::SanitizeFloat(ns.strength));
 
-				
+
 				FVector Vector = dir
 					*
 					node->Strength
@@ -449,11 +451,12 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 				ll("dir: " + dir.ToString());
 				ll("node->Strength: " + FString::SanitizeFloat(node->Strength));
 				ll("alpha: " + FString::SanitizeFloat(alpha));
-				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->velocity.ToString());
-				
+				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->
+					velocity.ToString());
+
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
 				kn->velocity += Vector / l;
-				
+
 
 				ll("velocity: " + kn->velocity.ToString());
 
@@ -465,7 +468,6 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					{
 						ll("velocity is too large. eeeeeeeeeeeee ");
 						eeeee();
-						
 					}
 				}
 			}
@@ -543,13 +545,11 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			}
 			else
 			{
-				
 			}
 			// if (l < distanceMin2) l = Math.sqrt(distanceMin2 * l);
 			if (l < distancemin)
 				l = sqrt(distancemin * l);
 		}
-
 
 
 		// do if (
@@ -593,17 +593,15 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		else
 		{
 			PointData* currentNode = node->Data;
-		
+
 			if (
 				currentNode->Node != kn
 			)
 			{
-				
 				float w = currentNode->Node->strength * alpha / l;
 				kn->velocity += dir * w;
 				ll("velocity: " + kn->velocity.ToString());
 			}
-		
 		}
 		ll("Returning false at the very end. ");
 		return false;
