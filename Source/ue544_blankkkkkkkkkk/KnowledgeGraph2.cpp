@@ -10,7 +10,7 @@
 #define print(text) if (GEngine) GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White,text)
 
 
-void AKnowledgeGraph::DoWork1()
+void AKnowledgeGraph::defaultGenerateGraphMethod()
 {
 	//Retrieving an array property and printing each field
 	int jnodes11 = jnodes1;
@@ -152,7 +152,7 @@ void AKnowledgeGraph::generateGraph()
 
 	case 2:
 		{
-			DoWork1();
+			defaultGenerateGraphMethod();
 		}
 		break;
 	case 3:
