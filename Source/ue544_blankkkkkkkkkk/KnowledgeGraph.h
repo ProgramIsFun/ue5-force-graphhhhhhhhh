@@ -18,7 +18,6 @@
 // class FORCEGRAPH_API AKnowledgeGraph : public AActor
 
 
-
 UCLASS()
 class UE544_BLANKKKKKKKKKK_API AKnowledgeGraph : public AActor
 {
@@ -47,23 +46,22 @@ public:
 	// NodeStrength AddUpChildren(const FSimpleOctree::FNode& node, FString node_id);
 	// void ApplyManyBody(AKnowledgeNode* kn);
 	// void FindManyBodyForce(AKnowledgeNode* kn, const FSimpleOctree::FNode& node,
-	                       // const FOctreeNodeContext3 CurrentContext, FString node_id);
+	// const FOctreeNodeContext3 CurrentContext, FString node_id);
 	void tttttttttttt();
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float LOGGGGGGGGG = false;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float alpha = 1;
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float iterations = 0;
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float maxiterations = 1000000;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float alphaMin = 0.001;
 	// float alphaMin = 0.09;
-
 
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
@@ -97,11 +95,11 @@ public:
 	int jnodes1 = 50;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int biasinitway=0;
-	
+	int biasinitway = 0;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int modeeeeeeeee=1;
-	
+	int modeeeeeeeee = 1;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float initialRadius = 10;
 
@@ -130,5 +128,4 @@ private:
 	// Called every frame
 public:
 	virtual void Tick(float DeltaTime) override;
-
 };
