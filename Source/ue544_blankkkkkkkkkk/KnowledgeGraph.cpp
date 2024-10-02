@@ -161,7 +161,6 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 			else
 			{
 			}
-			
 		}
 
 		for (auto& link : all_links)
