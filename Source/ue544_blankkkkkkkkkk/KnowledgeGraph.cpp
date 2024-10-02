@@ -119,7 +119,7 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 			if (0)
 			{
-				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+				ll("POSITION! node: " + FString::FromInt(node.Key));
 				ll("position: " + kn->GetActorLocation().ToString());
 				ll("velocity: " + kn->velocity.ToString());
 			}
@@ -147,11 +147,21 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 			}
 
 
-			// kn->velocity *= 0; //reset velocities
+			if (0)
+			{
+				kn->velocity *= 0; //reset velocities
+			}
 
-			//            print("FINAL POSITION!");
-			//            print(FString::FromInt(node.Key));
-			//            print(kn->GetActorLocation().ToString());
+			if (0)
+			{
+				ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
+				ll("position: " + kn->GetActorLocation().ToString());
+				ll("velocity: " + kn->velocity.ToString());
+			}
+			else
+			{
+			}
+			
 		}
 
 		for (auto& link : all_links)
