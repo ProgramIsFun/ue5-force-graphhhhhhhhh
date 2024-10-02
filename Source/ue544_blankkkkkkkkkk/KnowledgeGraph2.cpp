@@ -311,6 +311,8 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 
 void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 {
+
+	bool log = true;
 	if (1)
 	{
 		if (0)
@@ -379,9 +381,6 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 		{
 			//
 			OctreeData2 = new OctreeNode(
-				// FVector(0, 0, 0),
-				// 100.0f
-
 			);
 
 
@@ -390,17 +389,17 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 			OctreeData2->AccumulateStrengthAndComputeCenterOfMass();
 
 			// lll("tttttttttttttttttttttttt");
-			ll("!!!OctreeData2->CenterOfMass: " + OctreeData2->CenterOfMass.ToString());
-			ll("!!!OctreeData2->strength: " + FString::SanitizeFloat(OctreeData2->Strength));
+			ll("!!!OctreeData2->CenterOfMass: " + OctreeData2->CenterOfMass.ToString(), log);
+			ll("!!!OctreeData2->strength: " + FString::SanitizeFloat(OctreeData2->Strength), log);
 
 			for (auto& node : all_nodes)
 			{
-				ll("Traversed the tree based on this Actor Kn, nodekey: -------------------------------------" +
-					FString::FromInt(node.Key));
+				ll("Traversed the tree And calculate velocity on this Actor Kn, nodekey: -------------------------------------" +
+					FString::FromInt(node.Key), log);
 				TraverseBFS(OctreeData2, SampleCallback, alpha, node.Value);
-				ll("Finished traversing the tree based on this Actor Kn. ");
+				ll("Finished traversing the tree based on this Actor Kn. ", log);
 			}
-			ll("Finished traversing");
+			ll("Finished traversing, now we can delete the tree. ", log);
 			delete OctreeData2;
 		}
 	}
@@ -450,18 +449,20 @@ void AKnowledgeGraph::apply_center_force_and_move_the_node_directly()
 
 void AKnowledgeGraph::ApplyForces()
 {
+	bool log = true;
+	
 	// In here velocity of all notes are zeroed
 	// In the following for loop, In the first few loop, the velocity is 0. 
 
-	ll("Ready to calculate link.--------------------------------------");
+	ll("Ready to calculate link.--------------------------------------",log);
 	calculate_link_force_and_update_velocity();
-	ll("Finish calculating link.--------------------------------------");
+	ll("Finish calculating link.--------------------------------------",log);
 	if (manybody)
 	{
-		ll("Ready to calculate charge.--------------------------------------");
+		ll("Ready to calculate charge.--------------------------------------",log);
 
 		calculate_charge_force_and_update_velocity();
-		ll("Finish calculating charge.--------------------------------------");
+		ll("Finish calculating charge.--------------------------------------",log);
 	}
 	else
 	{
