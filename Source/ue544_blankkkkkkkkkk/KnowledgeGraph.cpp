@@ -54,7 +54,7 @@ void AKnowledgeGraph::BeginPlay()
 	}
 
 
-	DoWork2();
+	generateGraph();
 
 
 	if (!init)

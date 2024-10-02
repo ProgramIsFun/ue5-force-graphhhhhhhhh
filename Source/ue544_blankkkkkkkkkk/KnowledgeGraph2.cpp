@@ -62,7 +62,7 @@ void AKnowledgeGraph::DoWork1()
 }
 
 
-void AKnowledgeGraph::DoWork2()
+void AKnowledgeGraph::generateGraph()
 {
 	switch (wayofinitnodeslinks)
 	{

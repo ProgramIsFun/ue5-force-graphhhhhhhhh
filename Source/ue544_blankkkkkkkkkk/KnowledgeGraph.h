@@ -31,7 +31,7 @@ public:
 	void CalculatelinkAndatevelocity();
 	void Calculatechargeforceandupdatevelocity();
 	void ApplyCenterforceandmovedirectly();
-	void DoWork2();
+	void generateGraph();
 	void DoWork1();
 
 	void AddNode1(int32 id, AKnowledgeNode* kn);
