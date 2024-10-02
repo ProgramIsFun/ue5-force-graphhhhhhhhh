@@ -193,7 +193,7 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 			}
 			else
 			{
-				// If no data is associated with this Leave node, we will never record the total weight and strength.
+				// If no data is associated with this Leaf node, we will never record the total weight and strength.
 				// StrengthSet=false;
 			}
 		}
