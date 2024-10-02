@@ -4,17 +4,17 @@
 
 #include "CoreMinimal.h"
 
-#ifndef ENABLE_LOGGING
-#define ENABLE_LOGGING 0
-#endif
-
-
-
-#if ENABLE_LOGGING
-#define ll(StringToLog, ...) lll2(StringToLog, ##__VA_ARGS__)
-#else
-#define ll(StringToLog, ...) // Define as empty to disable logging
-#endif
+// #ifndef ENABLE_LOGGING
+// #define ENABLE_LOGGING 0
+// #endif
+//
+//
+//
+// #if ENABLE_LOGGING
+// #define ll(StringToLog, ...) lll2(StringToLog, ##__VA_ARGS__)
+// #else
+// #define ll(StringToLog, ...) // Define as empty to disable logging
+// #endif
 
 
 
@@ -30,7 +30,7 @@
 void lll(const FString& TextToWrite);
 
 
-void lll2(const FString& StringToLog, int SeverityLevel = 0, const FString& Prefix = TEXT("[Info]"));
+void ll(const FString& StringToLog, int SeverityLevel = 0, const FString& Prefix = TEXT("[Info]"));
 
 
 FVector Jiggle(const FVector& Vec, float Magnitude);
