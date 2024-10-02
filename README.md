@@ -21,7 +21,7 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 
 ## A shot introduction to unreal engine 5
 
-1. Characters. Pawns, and Actors: What's the Difference?
+1.Characters. Pawns, and Actors: What's the Difference?
 
 They are all CPP classes, which have a very detailed implementation by the epic games in the source code. 
 
