@@ -136,6 +136,7 @@ void AKnowledgeGraph::update_link_position()
 
 void AKnowledgeGraph::Tick(float DeltaTime)
 {
+	bool log = true;
 	Super::Tick(DeltaTime);
 
 	if (GEngine)
@@ -162,25 +163,28 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 	{
 		
 		ll("TICK----------------------------------------------------------------------------"
-			"----------------------------------------------------------------------------");
-		ll("alpha: " + FString::SanitizeFloat(alpha));
-		ll("iterations: " + FString::FromInt(iterations));
+			"----------------------------------------------------------------------------",log);
+		ll("alpha: " + FString::SanitizeFloat(alpha),log);
+		ll("iterations: " + FString::FromInt(iterations),log);
 
 		if (alpha < alphaMin)
 		{
-			ll("alpha is less than alphaMin");
+			ll("alpha is less than alphaMin",log);
 			// UE_LOG(LogTemp, Warning, TEXT("alpha is less than alphaMin"));
 			return;
 		}
 
 		alpha += (alphaTarget - alpha) * alphaDecay; //need to restart this if want to keep moving
-		ll("alpha: " + FString::SanitizeFloat(alpha));
+		ll("alpha: " + FString::SanitizeFloat(alpha),log);
 
 
+		ll("apply forces",log);
 		ApplyForces();
 
+		ll("update actor location based on velocity",log);
 		update_actor_location_based_on_velocity();
 
+		ll("update link position",log);
 		update_link_position();
 	}
 	else
