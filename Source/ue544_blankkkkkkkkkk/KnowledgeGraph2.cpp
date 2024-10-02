@@ -406,7 +406,7 @@ void AKnowledgeGraph::Calculatechargeforceandupdatevelocity()
 	}
 }
 
-void AKnowledgeGraph::ApplyCenterforceandmovedirectly()
+void AKnowledgeGraph::apply_center_force_and_move_the_node_directly()
 {
 	// Following is javascript implementation of Center Force
 	// for (i = 0; i < n; ++i) {
@@ -467,7 +467,7 @@ void AKnowledgeGraph::ApplyForces()
 	{
 	}
 
-	ApplyCenterforceandmovedirectly();
+	apply_center_force_and_move_the_node_directly();
 }
 
 // NodeStrength AKnowledgeGraph::AddUpChildren(

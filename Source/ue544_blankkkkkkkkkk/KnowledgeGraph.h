@@ -30,7 +30,7 @@ public:
 	void GenerateConnectedGraph(int32 NumClusters, int32 NodesPerCluster);
 	void CalculatelinkAndatevelocity();
 	void Calculatechargeforceandupdatevelocity();
-	void ApplyCenterforceandmovedirectly();
+	void apply_center_force_and_move_the_node_directly();
 	void generateGraph();
 	void defaultGenerateGraphMethod();
 
