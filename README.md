@@ -1,10 +1,16 @@
 ## What is this project? 
 
+
+A Force-Directed Graph, or Force-Based Graph, is a type of layout commonly used in a variety of application areas: network visualization, large graph visualization, knowledge representation, system management, or mesh visualization.
+
 This contains an implementation of the force directed graph in unreal engine 5.
 
 replicate the result of the popular library https://github.com/vasturiano/3d-force-graph.
 
 ![image](https://github.com/user-attachments/assets/4e648745-8ee3-4fc7-9008-fd1d53785711)
+
+
+
 
 
 ## To do list
