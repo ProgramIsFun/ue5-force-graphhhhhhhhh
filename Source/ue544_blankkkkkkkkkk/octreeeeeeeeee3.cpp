@@ -118,6 +118,7 @@ void AddDataPoint(OctreeNode* node, AKnowledgeNode* kn)
 	{
 		if (
 			node->Data != nullptr
+			// If this leaf node already has data
 		)
 		{
 			// If the node already has data, subdivide and add the new data point
@@ -129,6 +130,9 @@ void AddDataPoint(OctreeNode* node, AKnowledgeNode* kn)
 			// No data is associated with the current node
 			node->Data = new PointData(kn);
 			node->TotalDataPoints = 1; // Now properly accounting for the node having new data
+
+			// All the 8 pointers of children's property Should still be nullptr.
+
 		}
 	}
 }
@@ -210,10 +214,7 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 
 
 					if (
-
 						child->StrengthSet || !child->IsLeaf()
-
-
 					)
 					{
 						float c = FMath::Abs(child->Strength);
@@ -253,7 +254,6 @@ void OctreeNode::AccumulateStrengthAndComputeCenterOfMass()
 	else
 	{
 		// Instead of using recursion, we will traverse the tree using bfs and record the path, And then we will calculate center of mass based on the Reverse order.
-		
 	}
 }
 
