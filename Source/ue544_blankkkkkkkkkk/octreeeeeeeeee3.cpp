@@ -438,15 +438,15 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					alpha;
 				ll("dir: " + dir.ToString(), log);
 				ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
-				ll("alpha: " + FString::SanitizeFloat(alpha));
+				ll("alpha: " + FString::SanitizeFloat(alpha), log);
 				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->
-					velocity.ToString());
+					velocity.ToString(), log);
 
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
 				kn->velocity += Vector / l;
 
 
-				ll("velocity: " + kn->velocity.ToString());
+				ll("velocity: " + kn->velocity.ToString(), log);
 
 				// This velocity is too large or too negative. 
 				// We need to normalize it.
@@ -459,7 +459,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					}
 				}
 			}
-			ll("Early termination. ");
+			ll("Early termination. ", log);
 			return true;
 		}
 
@@ -469,8 +469,8 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			||
 			l >= distancemax)
 		{
-			ll("You need to return false here. ");
-			ll("l: " + FString::SanitizeFloat(l));
+			ll("You need to return false here. ", log);
+			ll("l: " + FString::SanitizeFloat(l), log);
 			return false;
 		}
 
@@ -480,14 +480,14 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		if (node->Data == nullptr)
 
 		{
-			ll("Data is null");
+			ll("Data is null", log);
 			return true;
 		}
 		else
 		{
 			if (node->Data->Node == nullptr)
 			{
-				lll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.");
+				ll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.", log);
 			}
 			else
 			{
@@ -507,7 +507,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			//
 		)
 		{
-			ll("Need to randomize something here.");
+			ll("Need to randomize something here.", log);
 
 			//print("IM LEAF");
 			if (0)
@@ -588,10 +588,10 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			{
 				float w = currentNode->Node->strength * alpha / l;
 				kn->velocity += dir * w;
-				ll("velocity: " + kn->velocity.ToString());
+				ll("velocity: " + kn->velocity.ToString(), log);
 			}
 		}
-		ll("Returning false at the very end. ");
+		ll("Returning false at the very end. ", log);
 		return false;
 	}
 }
