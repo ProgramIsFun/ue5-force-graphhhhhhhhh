@@ -355,7 +355,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 {
 	bool log = true;
 	ll("-----------------", log);
-	ll("SampleCallback", log);
+	// ll("SampleCallback", log);
 
 	if (0)
 	{
@@ -376,9 +376,10 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		float distancemax = 1000000000;
 		float distancemin = 1;
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
+
 		ll("lower: " + (node->Center - node->Extent).ToString(), log);
 		ll("upper: " + (node->Center + node->Extent).ToString(), log);
-		ll("width: " + width.ToString(), log);
+		// ll("width: " + width.ToString(), log);
 		ll("dir: " + dir.ToString(), log);
 		ll("l: " + FString::SanitizeFloat(l), log);
 		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2), log);
@@ -432,11 +433,17 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					node->Strength
 					*
 					alpha;
-				ll("dir: " + dir.ToString(), log);
-				ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
-				ll("alpha: " + FString::SanitizeFloat(alpha), log);
-				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->
-				   velocity.ToString(), log);
+
+				if (1)
+				{
+					ll("l: " + FString::SanitizeFloat(l), log);
+					ll("dir: " + dir.ToString(), log);
+					ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
+					ll("alpha: " + FString::SanitizeFloat(alpha), log);
+				
+					ll("vector: " + Vector.ToString()  + " velocity: " + kn->
+					   velocity.ToString(), log);
+				}
 
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
 				kn->velocity += Vector / l;
@@ -444,8 +451,6 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 
 				ll("velocity: " + kn->velocity.ToString(), log);
 
-				// This velocity is too large or too negative. 
-				// We need to normalize it.
 				if (1)
 				{
 					if (kn->velocity.Size() > 100000000000000)
@@ -466,7 +471,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			l >= distancemax)
 		{
 			ll("22222222222222222 You need to return false here. ", log);
-			ll("l: " + FString::SanitizeFloat(l), log);
+			// ll("l: " + FString::SanitizeFloat(l), log);
 			return false;
 		}
 
@@ -503,7 +508,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			//
 		)
 		{
-			ll("Need to randomize something here.", log);
+			// ll("Need to randomize something here.", log);
 
 			//print("IM LEAF");
 			if (0)
