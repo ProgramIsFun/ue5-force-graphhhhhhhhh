@@ -300,20 +300,21 @@ void OctreeNode::Cover(float x, float y, float z)
 
 void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowledgeNode* kn)
 {
+	bool log = true;
+
+	
+	
 	// return;
 	if (!root) return; // If the root is null, return immediately
 
 	// std::queue<OctreeNode*> nodeQueue;
-	std::stack<OctreeNode*> nodeQueue;
-	nodeQueue.push(root);
-	lll("tttttttttttttttt2");
-	while (!nodeQueue.empty())
+	std::stack<OctreeNode*> Stack1;
+	Stack1.push(root);
+	while (!Stack1.empty())
 	{
-		lll("tttttttttttttttt3");
 
-		OctreeNode* currentNode = nodeQueue.top();
-		nodeQueue.pop();
-		lll("tttttttttttttttt6");
+		OctreeNode* currentNode = Stack1.top();
+		Stack1.pop();
 
 		// Execute the callback on the current node
 		bool skipChildren = callback(currentNode, kn, alpha);
@@ -331,7 +332,7 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 			{
 				if (child)
 				{
-					nodeQueue.push(child);
+					Stack1.push(child);
 				}
 			}
 		}
@@ -345,7 +346,7 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 				{
 					if (child->Data || !child->IsLeaf())
 					{
-						nodeQueue.push(child);
+						Stack1.push(child);
 					}
 				}
 			}
