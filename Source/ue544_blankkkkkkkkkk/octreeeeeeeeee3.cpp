@@ -356,25 +356,13 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 
 bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 {
-	lll("tttttttttttttttt22222254");
-
+	bool log = true;
+	ll("-----------------", log);
+	ll("SampleCallback",log);
+	
 	if (0)
 	{
-		if (!node || !node->Data) return false; // If no data, continue traversal
-
-		// Set a threshold value for some condition
-		const float threshold = 10.0f;
-
-		// Example condition: stop traversal if any point's x-coordinate is greater than threshold
-		if (node->Data->Node->GetActorLocation().X > threshold)
-		{
-			// Print/log some information (in Unreal it could be UE_LOG or GLog)
-			UE_LOG(LogTemp, Warning, TEXT("Node with Data exceeding threshold found at X: %f"),
-			       node->Data->Node->GetActorLocation().X);
-			return true; // Stop visiting further children of this node
-		}
-
-		return false; // Continue to visit children
+		
 	}
 	else
 	{
@@ -391,14 +379,13 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		float theta2 = 0.81;
 		float distancemax = 1000000000;
 		float distancemin = 1;
-		ll("-----------------");
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
-		ll("lower: " + (node->Center - node->Extent).ToString());
-		ll("upper: " + (node->Center + node->Extent).ToString());
-		ll("width: " + width.ToString());
-		ll("dir: " + dir.ToString());
-		ll("l: " + FString::SanitizeFloat(l));
-		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2));
+		ll("lower: " + (node->Center - node->Extent).ToString(), log);
+		ll("upper: " + (node->Center + node->Extent).ToString(), log);
+		ll("width: " + width.ToString(), log);
+		ll("dir: " + dir.ToString(), log);
+		ll("l: " + FString::SanitizeFloat(l), log);
+		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2), log);
 
 
 		// if size of current box is less than distance between nodes
@@ -449,8 +436,8 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					node->Strength
 					*
 					alpha;
-				ll("dir: " + dir.ToString());
-				ll("node->Strength: " + FString::SanitizeFloat(node->Strength));
+				ll("dir: " + dir.ToString(), log);
+				ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
 				ll("alpha: " + FString::SanitizeFloat(alpha));
 				ll("111111111111vector: " + Vector.ToString() + " l " + FString::SanitizeFloat(l) + " velocity: " + kn->
 					velocity.ToString());
