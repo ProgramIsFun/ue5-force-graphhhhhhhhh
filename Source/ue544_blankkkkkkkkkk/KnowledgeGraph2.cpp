@@ -223,7 +223,7 @@ void AKnowledgeGraph::GenerateConnectedGraph(int32 NumClusters, int32 NodesPerCl
 }
 
 
-void AKnowledgeGraph::CalculatelinkAndatevelocity()
+void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 {
 	int32 Index = 0;
 	// link forces
@@ -454,7 +454,7 @@ void AKnowledgeGraph::ApplyForces()
 	// In the following for loop, In the first few loop, the velocity is 0. 
 
 	ll("Ready to calculate link.--------------------------------------");
-	CalculatelinkAndatevelocity();
+	calculate_link_force_and_update_velocity();
 	ll("Finish calculating link.--------------------------------------");
 	if (manybody)
 	{
