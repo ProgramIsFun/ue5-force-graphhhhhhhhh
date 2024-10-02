@@ -37,7 +37,7 @@ void lll(const FString& TextToWrite)
 	{
 		
 	}
-	if (0)
+	if (1)
 	{
 		// Define the path to the log file.
 		std::string FilePath = R"(V:\UNREALLLLPROJECTSSSSSS\FORCEGRAPH\Source\FORCEGRAPH\MyLogFile.txt)";  // Change path accordingly
@@ -58,17 +58,7 @@ void lll(const FString& TextToWrite)
 			UE_LOG(LogTemp, Warning, TEXT("Failed to open log file."));
 		}
 	}
-	else
-	{
-		if (0)
-		{
-			ll(TextToWrite, 0, TEXT("[Info]"));
-		}
-		else
-		{
-			
-		}
-	}
+	
 }
 
 
@@ -93,7 +83,7 @@ void lll2(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 		// ELogVerbosity::Type LogLevel1;
 	
 	
-		if (0)
+		if (1)
 		{
 			// Map SeverityLevel to ELogVerbosity
 			switch (SeverityLevel) 
@@ -112,27 +102,30 @@ void lll2(const FString& StringToLog, int SeverityLevel, const FString& Prefix)
 			}
 		}
 		else
-		{// Map SeverityLevel to ELogVerbosity
-			switch (SeverityLevel) 
-			{
-			case 1:
+		{
 			
-				UE_LOG(LogTemp, Warning, TEXT("%s"), *LogMessage);
-	
-				break;
-			case 2:
-				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);	
-				break;
-			default:
-				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
-				break;
-			}
+		}
+
+		if (0)
+		{
 			if(GEngine)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, LogMessage);
 			}
 		}
-	
+		else
+		{
+			
+		}
+	}
+
+
+	if (1)
+	{
+		lll(StringToLog);
+	}
+	else
+	{
 		
 	}
 }
