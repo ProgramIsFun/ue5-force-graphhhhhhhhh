@@ -19,7 +19,9 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 
 Possible solution 
 
-Need to time the exact time you should buy each function in order to find the bottleneck. 
+Need to time the exact time each function in order to find the bottleneck.
+
+
 
 ### Adding functions such as import graph or export graph in a Json format. 
 
