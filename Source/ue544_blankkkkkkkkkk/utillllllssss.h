@@ -25,7 +25,7 @@
 // void lll(const std::string& LogMessage);
 
 
-
+void ClearLogFile();
 // void lll(const std::string& text);
 void lll(const FString& TextToWrite);
 

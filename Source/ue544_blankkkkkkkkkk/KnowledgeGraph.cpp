@@ -64,6 +64,8 @@ void AKnowledgeGraph::BeginPlay()
 
 		CalculateBiasstrengthOflinks();
 	}
+
+	ClearLogFile();
 }
 
 

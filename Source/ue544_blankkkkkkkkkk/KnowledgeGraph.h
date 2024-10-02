@@ -72,15 +72,15 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int32 wayofinitnodeslinks = 2;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float edgeDistance = 30;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float nodeStrength = -60;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float distancemin = 1;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float distancemax = 10000000;
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float theta2 = 0.81;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
@@ -94,7 +94,7 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int jnodes1 = 50;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int biasinitway = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)

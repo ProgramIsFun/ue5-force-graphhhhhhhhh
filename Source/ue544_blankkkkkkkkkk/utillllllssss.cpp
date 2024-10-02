@@ -23,11 +23,25 @@
 
 
 
+void ClearLogFile() {
+
+	std::string FilePath = R"(V:\UNREALLLLPROJECTSSSSSS\ue544_blankkkkkkkkkk\Saved\Logs\MyLogFile.txt)";
+
+	std::ofstream LogFile(FilePath, std::ios::trunc); // Open in truncate mode to clear contents
+	if (LogFile.is_open()) {
+		LogFile.close();  // Just close the file, it's already empty
+	} else {
+		// std::cerr << "Failed to open log file for clearing." << std::endl;
+	}
+}
+
+
+
+
 
 void lll(const FString& TextToWrite)
 {
-
-	bool nologgggggggg=true;
+	bool nologgggggggg = false;
 
 	if (nologgggggggg)
 	{
@@ -35,20 +49,23 @@ void lll(const FString& TextToWrite)
 	}
 	else
 	{
-		
 	}
 	if (1)
 	{
 		// Define the path to the log file.
-		std::string FilePath = R"(V:\UNREALLLLPROJECTSSSSSS\FORCEGRAPH\Source\FORCEGRAPH\MyLogFile.txt)";  // Change path accordingly
-	
-		// Open the log file with append mode.
-		std::ofstream LogFile(FilePath, std::ios::app);
+		std::string FilePath = R"(V:\UNREALLLLPROJECTSSSSSS\ue544_blankkkkkkkkkk\Saved\Logs\MyLogFile.txt)";
+		// Change path accordingly
+
+		
+		std::ofstream LogFile(FilePath,
+		                      std::ios::app
+		                      // std::ios::out
+		);
 		if (LogFile.is_open())
 		{
 			// Write the text to the file and end with a new line.
 			LogFile << TCHAR_TO_ANSI(*TextToWrite) << std::endl;
-	
+
 			// Close the file.
 			LogFile.close();
 		}
@@ -58,7 +75,6 @@ void lll(const FString& TextToWrite)
 			UE_LOG(LogTemp, Warning, TEXT("Failed to open log file."));
 		}
 	}
-	
 }
 
 
@@ -68,9 +84,9 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 	{
 		return;
 	}
-	
 
-	bool nologgggggggg=false;
+
+	bool nologgggggggg = false;
 
 	if (nologgggggggg)
 	{
@@ -78,22 +94,18 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 	}
 	else
 	{
-		
 	}
 	if (!StringToLog.IsEmpty())
 	{
-	
-	
 		FString LogMessage = Prefix + StringToLog; // Prepends a prefix to the original message
 		// ELogVerbosity::Type LogLevel1;
-	
-	
+
+
 		if (1)
 		{
 			// Map SeverityLevel to ELogVerbosity
-			switch (SeverityLevel) 
+			switch (SeverityLevel)
 			{
-
 			case 0:
 				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
 				break;
@@ -101,7 +113,7 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 				UE_LOG(LogTemp, Warning, TEXT("%s"), *LogMessage);
 				break;
 			case 2:
-				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);	
+				UE_LOG(LogTemp, Error, TEXT("%s"), *LogMessage);
 				break;
 			default:
 				UE_LOG(LogTemp, Log, TEXT("%s"), *LogMessage);
@@ -110,19 +122,17 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 		}
 		else
 		{
-			
 		}
 
 		if (0)
 		{
-			if(GEngine)
+			if (GEngine)
 			{
 				GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, LogMessage);
 			}
 		}
 		else
 		{
-			
 		}
 	}
 
@@ -133,7 +143,6 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 	}
 	else
 	{
-		
 	}
 }
 
@@ -148,14 +157,10 @@ FVector Jiggle(const FVector& Vec, float Magnitude)
 }
 
 
-
-
-
 void eeeee()
 {
 	// if (GEditor)
 	// {
 	// 	GEditor->EndPlayMap();
 	// }
-
 }

@@ -455,7 +455,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					}
 				}
 			}
-			ll("Early termination. ", log);
+			ll("11111111111111 Early termination. ", log);
 			return true;
 		}
 
@@ -465,7 +465,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			||
 			l >= distancemax)
 		{
-			ll("You need to return false here. ", log);
+			ll("22222222222222222 You need to return false here. ", log);
 			ll("l: " + FString::SanitizeFloat(l), log);
 			return false;
 		}
@@ -587,7 +587,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 				ll("velocity: " + kn->velocity.ToString(), log);
 			}
 		}
-		ll("Returning false at the very end. ", log);
+		ll("3333333333333333 Returning false at the very end. ", log);
 		return false;
 	}
 }
