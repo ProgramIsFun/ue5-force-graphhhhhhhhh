@@ -43,7 +43,7 @@ so that every node will be connected to the previous node, Which eliminates any 
     In the javascript implementation of the OcTree , there is no Pointer. The location information of all the nodes
     is directly stored in an array With eight elements, Each elements Is either NULL Or an array with eight elements, so on and so forth.
     Perhaps this is the reason why the javascript implementation is faster than mine.
-    The way that I implement the tree is basically every node might have 8 pointers, and every pointer Is either a null pointer or a pointer to another tree node. 
+    The way that I implement the tree is basically every node have 8 pointers, and every pointer Is either a null pointer or a pointer to another tree node. I am unsure whether this structure will prolong the calculation.  
   
 ### 2
 
