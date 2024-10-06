@@ -28,8 +28,12 @@ When solving this problem, we could just use the level https://github.com/everyt
 Which is just an empty world with only the graph in it. 
 
 The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
-But my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph. If the javascript version could render 1000 or few thousand nodes smoothly, 
-then my implementation should also be able to render 100 nodes smoothly.
+my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph.
+the javascript version could render 1000 or few thousand nodes in real time smoothly.
+In the javascript implementation of the OcTree , there is no Pointer. The location information of all the nodes
+is directly stored in an array With eight elements, Each elements Is either NULL Or an array with eight elements, so on and so forth. 
+Perhaps this is the reason why the javascript implementation is faster than mine.
+
 
 
 #### Possible solution
