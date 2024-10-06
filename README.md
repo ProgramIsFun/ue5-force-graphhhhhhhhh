@@ -24,8 +24,13 @@ The member variable is declared in https://github.com/everythingallaccount/ue4-f
 
 Because it is Uproperty, you can directly change the value in the editor. 
 
-To start it simple, we could just use the level https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Content/Minimal_Default11111.umap
+When solving this problem, we could just use the level https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Content/Minimal_Default11111.umap
 Which is just an empty world with only the graph in it. 
+
+The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
+But my implementation is actually copied from the javascript implementation. If the javascript version could render 1000 or few thousand nodes smoothly, 
+then my implementation should also be able to render 100 nodes smoothly.
+
 
 #### Possible solution
   - Check if the charge force is implemented correctly 
