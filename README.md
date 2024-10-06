@@ -23,12 +23,6 @@ The member variable is declared in https://github.com/everythingallaccount/ue4-f
 Because it is Uproperty, you can directly change the value in the editor.
 
 
-The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
-my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph.
-the javascript version could render 1000 or few thousand nodes in real time smoothly.
-In the javascript implementation of the OcTree , there is no Pointer. The location information of all the nodes
-is directly stored in an array With eight elements, Each elements Is either NULL Or an array with eight elements, so on and so forth. 
-Perhaps this is the reason why the javascript implementation is faster than mine.
 
 
 When solving this problem, we could just use the level https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Content/Minimal_Default11111.umap
@@ -43,6 +37,12 @@ so that every node will be connected to the previous node, Which eliminates any 
   - Check if the charge force is implemented correctly 
   - Need to time the exact time each function in order to find the bottleneck
   - Use the profiler to find the bottleneck
+  - The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
+    my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph.
+    the javascript version could render 1000 or few thousand nodes in real time smoothly.
+    In the javascript implementation of the OcTree , there is no Pointer. The location information of all the nodes
+    is directly stored in an array With eight elements, Each elements Is either NULL Or an array with eight elements, so on and so forth.
+    Perhaps this is the reason why the javascript implementation is faster than mine.
 
   
 ### 2
