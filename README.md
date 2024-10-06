@@ -17,6 +17,7 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 
 ### 1
 
+#### Problem description
 The rendering part is very laggy when the number of nodes reach 100.  Speed up the rendering part and make it less laggy. 
 
 The member variable is declared in https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Source/ue544_blankkkkkkkkkk/KnowledgeGraph.h#L95-L95
@@ -26,7 +27,7 @@ Because it is Uproperty, you can directly change the value in the editor.
 To start it simple, we could just use the level https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Content/Minimal_Default11111.umap
 Which is just an empty world with only the graph in it. 
 
-- Possible solution
+#### Possible solution
   - Check if the charge force is implemented correctly 
   - Need to time the exact time each function in order to find the bottleneck
   - Use the profiler to find the bottleneck
