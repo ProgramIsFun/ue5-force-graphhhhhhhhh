@@ -98,7 +98,7 @@ public:
 	int biasinitway = 0;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	int modeeeeeeeee = 1;
+	bool connect_to_previous = true;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float initialRadius = 10;

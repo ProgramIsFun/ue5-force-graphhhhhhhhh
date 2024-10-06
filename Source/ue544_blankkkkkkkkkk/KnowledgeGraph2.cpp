@@ -37,7 +37,7 @@ void AKnowledgeGraph::defaultGenerateGraphMethod()
 	int jedges11 = jnodes11; // Adjust the number of edges as needed to ensure coverage
 
 
-	if (modeeeeeeeee)
+	if (!connect_to_previous)
 	{
 		for (int32 i = 1; i < jedges11; i++)
 		{
@@ -240,17 +240,17 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 		auto target_node = all_nodes[link.Value->target];
 
 		FVector source_pos = source_node->GetActorLocation();
+		ll("source_pos: " + source_pos.ToString(), log);
 		FVector source_velocity = source_node->velocity;
-
+		ll("source_velocity: " + source_velocity.ToString(), log);
 		FVector target_pos = target_node->GetActorLocation();
+		ll("target_pos: " + target_pos.ToString(), log);
 		FVector target_velocity = target_node->velocity;
-
-		// UE_LOG(LogTemp, Warning, TEXT("source VELOCITY1: %s"), *source_velocity.ToString());
-		// UE_LOG(LogTemp, Warning, TEXT("target VELOCITY1: %s"), *target_velocity.ToString());
+		ll("target_velocity: " + target_velocity.ToString(), log);
 
 
 		FVector new_v = target_pos + target_velocity - source_pos - source_velocity;
-
+		ll("new_v: " + new_v.ToString(), log);
 
 		if (new_v.IsNearlyZero())
 		{
@@ -260,15 +260,14 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 		float l = new_v.Size();
 		// UE_LOG(LogTemp, Warning, TEXT("!!!link.Value->distance: %f"), link.Value->distance);
 
-
+		ll("l: " + FString::SanitizeFloat(l), log);
 		// By looking at the javascript code, we can see strength Will only be computed when there is a change Of the graph structure to the graph.
 		l = (l - link.Value->distance) /
 			l * alpha * link.Value->strength;
+		ll("l: " + FString::SanitizeFloat(l), log);
 		new_v *= l;
-
-
-		ll("NEW V: " + new_v.ToString() +
-			"link.Value->bias: " + FString::SanitizeFloat(link.Value->bias), log);
+		
+		
 		// Record targeted original velocity.
 		FVector target_original_velocity = target_node->velocity;
 
@@ -279,6 +278,8 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 		}
 		else
 		{
+			ll("new_v: " + new_v.ToString(), log);
+			ll("link.Value->bias: " + FString::SanitizeFloat(link.Value->bias), log);
 			target_node->velocity -= new_v * (link.Value->bias);
 		}
 
@@ -934,6 +935,7 @@ void AKnowledgeGraph::initializeNodePosition()
 
 void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 {
+	bool log = true;
 	//link forces
 	float n = all_nodes.Num();
 	float m = all_links.Num();
@@ -947,7 +949,7 @@ void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 	for (auto& link : all_links)
 	{
 		ll("all_nodes[link.Value->source]->numberOfConnected: " + FString::FromInt(
-			all_nodes[link.Value->source]->numberOfConnected));
+			all_nodes[link.Value->source]->numberOfConnected), log);
 
 
 		float ttttttttttt = all_nodes[link.Value->source]->numberOfConnected +
@@ -957,10 +959,10 @@ void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 			ttttttttttt;
 
 
-		ll("!!!!!!!!!!!!!!!!!!!!!!!bias: " + FString::SanitizeFloat(bias));
+		ll("!!!!!!!!!!!!!!!!!!!!!!!bias: " + FString::SanitizeFloat(bias), log);
 
 
-		if (biasinitway == 0)
+		if (biasinitway)
 		{
 			link.Value->bias = bias > 0.5 ? (1 - bias) * 0.5 + bias : bias * 0.5;
 		}
@@ -968,20 +970,21 @@ void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 		{
 			link.Value->bias = bias;
 		}
-		ll("!!!!!!!!!!!!!!!!!!!!!!!bias: " + FString::SanitizeFloat(link.Value->bias));
+		ll("!!!!!!!!!!!!!!!!!!!!!!!bias: " + FString::SanitizeFloat(link.Value->bias), log);
 
 		link.Value->strength = 1.0 / fmin(all_nodes[link.Value->source]->numberOfConnected,
 		                                  all_nodes[link.Value->target]->numberOfConnected);
 	}
-
-	//charge forces
-	for (auto& node : all_nodes)
+	
+	if (0)
 	{
-		node.Value->strength = node.Value->strength; // nothing for now
+		//charge forces
+		for (auto& node : all_nodes)
+		{
+			node.Value->strength = node.Value->strength; // nothing for now
+		}
 	}
 
-	//center forces
-	//nothing
 	init = true;
 }
 
