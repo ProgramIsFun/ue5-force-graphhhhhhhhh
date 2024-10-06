@@ -309,6 +309,7 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 {
 	bool log = true;
+	bool log2 = false;
 	if (1)
 	{
 		if (0)
@@ -390,8 +391,9 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 
 			for (auto& node : all_nodes)
 			{
+				ll("--------------------------------------", log);
 				ll(
-					"Traversed the tree And calculate velocity on this Actor Kn, nodekey: -------------------------------------"
+					"Traverse the tree And calculate velocity on this Actor Kn, nodekey: -"
 					+
 					FString::FromInt(node.Key), log);
 				TraverseBFS(OctreeData2, SampleCallback, alpha, node.Value);

@@ -354,6 +354,7 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 {
 	bool log = true;
+	bool log2=false;
 	ll("-----------------", log);
 	// ll("SampleCallback", log);
 
@@ -377,12 +378,11 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		float distancemin = 1;
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
 
-		ll("lower: " + (node->Center - node->Extent).ToString(), log);
-		ll("upper: " + (node->Center + node->Extent).ToString(), log);
+		ll("lower: " + (node->Center - node->Extent).ToString() + " upper: " + (node->Center + node->Extent).ToString(), log);
 		// ll("width: " + width.ToString(), log);
-		ll("dir: " + dir.ToString(), log);
-		ll("l: " + FString::SanitizeFloat(l), log);
-		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2), log);
+		ll("dir: " + dir.ToString(), log2);
+		ll("l: " + FString::SanitizeFloat(l), log2);
+		ll("width.X * width.X / theta2: " + FString::SanitizeFloat(width.X * width.X / theta2), log2);
 
 
 		// if size of current box is less than distance between nodes
@@ -436,20 +436,20 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 
 				if (1)
 				{
-					ll("l: " + FString::SanitizeFloat(l), log);
-					ll("dir: " + dir.ToString(), log);
-					ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log);
-					ll("alpha: " + FString::SanitizeFloat(alpha), log);
+					ll("l: " + FString::SanitizeFloat(l), log2);
+					ll("dir: " + dir.ToString(), log2);
+					ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log2);
+					ll("alpha: " + FString::SanitizeFloat(alpha), log2);
 				
 					ll("vector: " + Vector.ToString()  + " velocity: " + kn->
-					   velocity.ToString(), log);
+					   velocity.ToString(), log2);
 				}
 
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
 				kn->velocity += Vector / l;
 
 
-				ll("velocity: " + kn->velocity.ToString(), log);
+				ll("velocity Updated: " + kn->velocity.ToString(), log);
 
 				if (1)
 				{
@@ -589,7 +589,7 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 			{
 				float w = currentNode->Node->strength * alpha / l;
 				kn->velocity += dir * w;
-				ll("velocity: " + kn->velocity.ToString(), log);
+				ll("velocity Updated: " + kn->velocity.ToString(), log);
 			}
 		}
 		ll("3333333333333333 Returning false at the very end. ", log);
