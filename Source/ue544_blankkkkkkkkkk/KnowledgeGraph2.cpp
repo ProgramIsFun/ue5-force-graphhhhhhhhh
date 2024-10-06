@@ -12,7 +12,6 @@
 
 void AKnowledgeGraph::defaultGenerateGraphMethod()
 {
-
 	bool log = true;
 	//Retrieving an array property and printing each field
 	int jnodes11 = jnodes1;
@@ -51,14 +50,14 @@ void AKnowledgeGraph::defaultGenerateGraphMethod()
 	}
 	else
 	{
-		ll("Randomly connected is disabled    will always connect to the previous node. ", log); 
+		ll("Randomly connected is disabled    will always connect to the previous node. ", log);
 		for (int32 i = 1; i < jedges11; i++)
 		{
 			int jid = i - 1;
-			int jsource = i - 1; // Ensures jsource is always valid within the index range
+			int jsource = i ; // Ensures jsource is always valid within the index range
 
 			// Connected to random node 
-			int jtarget = i;
+			int jtarget = i-1;
 			AddEdge(jid, jsource, jtarget);
 		}
 	}
@@ -162,6 +161,11 @@ void AKnowledgeGraph::generateGraph()
 
 		GenerateConnectedGraph(3, 10);
 		break;
+
+	default:
+		{
+			defaultGenerateGraphMethod();
+		}
 	}
 }
 
@@ -229,7 +233,7 @@ void AKnowledgeGraph::GenerateConnectedGraph(int32 NumClusters, int32 NodesPerCl
 void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 {
 	bool log = true;
-	
+
 	int32 Index = 0;
 	// link forces
 	// After loop, the velocity of all notes have been altered a little bit because of the link force already. 
@@ -266,8 +270,8 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 			l * alpha * link.Value->strength;
 		ll("l: " + FString::SanitizeFloat(l), log);
 		new_v *= l;
-		
-		
+
+
 		// Record targeted original velocity.
 		FVector target_original_velocity = target_node->velocity;
 
@@ -285,10 +289,9 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 
 		// Log out the original velocity and the update velocity. 
 		ll("TARGET VELOCITY: " + target_original_velocity.ToString() +
-			" -> " + target_node->velocity.ToString(), log);
+		   " -> " + target_node->velocity.ToString(), log);
 
 
-		
 		// Record source original velocity.
 		FVector source_original_velocity = source_node->velocity;
 
@@ -297,7 +300,7 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 
 
 		ll("SOURCE VELOCITY: " + source_original_velocity.ToString() + " -> " + source_node->velocity.ToString(), log);
-		
+
 
 		Index++;
 	}
@@ -305,7 +308,6 @@ void AKnowledgeGraph::calculate_link_force_and_update_velocity()
 
 void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 {
-
 	bool log = true;
 	if (1)
 	{
@@ -388,7 +390,9 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 
 			for (auto& node : all_nodes)
 			{
-				ll("Traversed the tree And calculate velocity on this Actor Kn, nodekey: -------------------------------------" +
+				ll(
+					"Traversed the tree And calculate velocity on this Actor Kn, nodekey: -------------------------------------"
+					+
 					FString::FromInt(node.Key), log);
 				TraverseBFS(OctreeData2, SampleCallback, alpha, node.Value);
 				ll("Finished traversing the tree based on this Actor Kn. ", log);
@@ -501,7 +505,7 @@ void AKnowledgeGraph::update_link_position()
 	for (auto& link : all_links)
 	{
 		auto l = link.Value;
-		
+
 		l->ChangeLoc(
 			all_nodes[l->source]->GetActorLocation(),
 			all_nodes[l->target]->GetActorLocation()
@@ -512,19 +516,19 @@ void AKnowledgeGraph::update_link_position()
 void AKnowledgeGraph::ApplyForces()
 {
 	bool log = true;
-	
+
 	// In here velocity of all notes are zeroed
 	// In the following for loop, In the first few loop, the velocity is 0. 
 
-	ll("Ready to calculate link.--------------------------------------",log);
+	ll("Ready to calculate link.--------------------------------------", log);
 	calculate_link_force_and_update_velocity();
-	ll("Finish calculating link.--------------------------------------",log);
+	ll("Finish calculating link.--------------------------------------", log);
 	if (manybody)
 	{
-		ll("Ready to calculate charge.--------------------------------------",log);
+		ll("Ready to calculate charge.--------------------------------------", log);
 
 		calculate_charge_force_and_update_velocity();
-		ll("Finish calculating charge.--------------------------------------",log);
+		ll("Finish calculating charge.--------------------------------------", log);
 	}
 	else
 	{
@@ -949,7 +953,7 @@ void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 	for (auto& link : all_links)
 	{
 		ll("all_nodes[link.Value->source]->numberOfConnected: " + FString::FromInt(
-			all_nodes[link.Value->source]->numberOfConnected), log);
+			   all_nodes[link.Value->source]->numberOfConnected), log);
 
 
 		float ttttttttttt = all_nodes[link.Value->source]->numberOfConnected +
@@ -975,7 +979,7 @@ void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 		link.Value->strength = 1.0 / fmin(all_nodes[link.Value->source]->numberOfConnected,
 		                                  all_nodes[link.Value->target]->numberOfConnected);
 	}
-	
+
 	if (0)
 	{
 		//charge forces
