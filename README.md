@@ -28,7 +28,8 @@ When solving this problem, we could just use the level https://github.com/everyt
 Which is just an empty world with only the graph in it. 
 
 And also in the process of solving this problem, we could have this variable set https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Source/ue544_blankkkkkkkkkk/KnowledgeGraph2.cpp#L39
-So that the Else part of the if else is wrong, so that every node will be connected to the previous node, Which eliminates any randomness To provide The same graph every time. 
+So that the Else part of the if else is executed. 
+so that every node will be connected to the previous node, Which eliminates any randomness To provide The same graph every time. 
 
 The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
 my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph.
