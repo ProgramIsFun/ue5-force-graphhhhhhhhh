@@ -38,12 +38,12 @@ so that every node will be connected to the previous node, Which eliminates any 
   - Need to time the exact time each function in order to find the bottleneck
   - Use the profiler to find the bottleneck
   - The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
-    my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph.
+    my implementation is actually Reference from the javascript implementation https://github.com/vasturiano/three-forcegraph.
     the javascript version could render 1000 or few thousand nodes in real time smoothly.
     In the javascript implementation of the OcTree , there is no Pointer. The location information of all the nodes
     is directly stored in an array With eight elements, Each elements Is either NULL Or an array with eight elements, so on and so forth.
     Perhaps this is the reason why the javascript implementation is faster than mine.
-
+    The way that I implement the tree is basically every node might have 8 pointers, and every pointer Is either a null pointer or a pointer to another tree node. 
   
 ### 2
 
