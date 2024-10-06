@@ -28,7 +28,7 @@ When solving this problem, we could just use the level https://github.com/everyt
 Which is just an empty world with only the graph in it. 
 
 The reason of the laggy rendering is possibly because it takes too much time to calculate the charge force.
-But my implementation is actually copied from the javascript implementation. If the javascript version could render 1000 or few thousand nodes smoothly, 
+But my implementation is actually copied from the javascript implementation https://github.com/vasturiano/three-forcegraph. If the javascript version could render 1000 or few thousand nodes smoothly, 
 then my implementation should also be able to render 100 nodes smoothly.
 
 
