@@ -15,15 +15,23 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 
 ## To do list
 
-### The rendering part is very laggy when the number of nodes reach 100.  Speed up the rendering part and make it less laggy. 
+### 1
 
+The rendering part is very laggy when the number of nodes reach 100.  Speed up the rendering part and make it less laggy. 
+
+The member variable is declared in https://github.com/everythingallaccount/ue4-force-graph-backupppp-11111/blob/3562cb5f74af1cfd5ff021711dbc703e5a4ead61/Source/ue544_blankkkkkkkkkk/KnowledgeGraph.h#L95-L95
+
+Because it is Uproperty, you can directly change the value in the editor. 
+ 
 - Possible solution
-  - Check if the charge force is implemented correctly. 
+  - Check if the charge force is implemented correctly 
   - Need to time the exact time each function in order to find the bottleneck
   - Use the profiler to find the bottleneck
 
   
-### Adding functions such as import graph or export graph in a Json format. 
+### 2
+
+Adding functions such as import graph or export graph in a Json format. 
 
 ## A shot introduction to unreal engine 5
 
