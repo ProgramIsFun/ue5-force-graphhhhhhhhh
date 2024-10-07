@@ -54,6 +54,69 @@ so that every node will be connected to the previous node, Which eliminates any 
 
 When node equal 5, The traversal seems have some difference with the javascript implementation. 
 
+```
+Traverse the tree And calculate velocity on this Actor Kn, nodekey: -0
+--------------------Right now, dealing with:  Lower boundX=-8.000 Y=-17.000 Z=0.000 Upper bound X=24.000 Y=15.000 Z=32.000
+Prepare to call the call back functions with this node. 
+-----------------
+-8.0 -17.0 0.0 24.0 15.0 32.0
+22222222222222222 You need to return false here. 
+i2
+Lower boundX=-8.000 Y=-1.000 Z=0.000 Upper boundX=8.000 Y=15.000 Z=16.000
+i0
+Lower boundX=-8.000 Y=-17.000 Z=0.000 Upper boundX=8.000 Y=-1.000 Z=16.000
+--------------------Right now, dealing with:  Lower boundX=-8.000 Y=-17.000 Z=0.000 Upper bound X=8.000 Y=-1.000 Z=16.000
+Prepare to call the call back functions with this node. 
+-----------------
+-8.0 -17.0 0.0 8.0 -1.0 16.0
+velocity Updated: X=3.416 Y=10.925 Z=-2.224
+11111111111111 Early termination. 
+--------------------Right now, dealing with:  Lower boundX=-8.000 Y=-1.000 Z=0.000 Upper bound X=8.000 Y=15.000 Z=16.000
+Prepare to call the call back functions with this node. 
+-----------------
+-8.0 -1.0 0.0 8.0 15.0 16.0
+22222222222222222 You need to return false here. 
+i3
+Lower boundX=-8.000 Y=7.000 Z=8.000 Upper boundX=0.000 Y=15.000 Z=16.000
+i2
+Lower boundX=-8.000 Y=7.000 Z=0.000 Upper boundX=0.000 Y=15.000 Z=8.000
+i1
+Lower boundX=-8.000 Y=-1.000 Z=8.000 Upper boundX=0.000 Y=7.000 Z=16.000
+--------------------Right now, dealing with:  Lower boundX=-8.000 Y=-1.000 Z=8.000 Upper bound X=0.000 Y=7.000 Z=16.000
+Prepare to call the call back functions with this node. 
+
+
+
+
+Right now, dealing with -8 -17 0 24 15 32
+visit.js:18 Prepare to call the call back functions with this node. 
+manyBody.js:13 -----------------
+manyBody.js:13 lower bound: -8 -17 0   upper bound: 24 15 32
+manyBody.js:13 2222222222222222222 Need to return false here. 
+visit.js:18 2 -8 -1 0 8 15 16
+visit.js:18 0 -8 -17 0 8 -1 16
+visit.js:18 Right now, dealing with -8 -17 0 8 -1 16
+visit.js:18 Prepare to call the call back functions with this node. 
+manyBody.js:13 -----------------
+manyBody.js:13 lower bound: -8 -17 0   upper bound: 8 -1 16
+manyBody.js:13 The following is updated velocity.  node.vx: 3.4155877922903866 node.vy: 10.924374461464797 node.vz: -2.223548889468486
+manyBody.js:13 11111111111111111111 Early termination. Returning true. 
+visit.js:18 Right now, dealing with -8 -1 0 8 15 16
+visit.js:18 Prepare to call the call back functions with this node. 
+manyBody.js:13 -----------------
+manyBody.js:13 lower bound: -8 -1 0   upper bound: 8 15 16
+manyBody.js:13 2222222222222222222 Need to return false here. 
+visit.js:18 6 -8 7 8 0 15 16
+visit.js:18 4 -8 -1 8 0 7 16
+visit.js:18 3 0 7 0 8 15 8
+visit.js:18 Right now, dealing with 0 7 0 8 15 8
+
+
+
+
+
+```
+
 ### 3
 Adding functions such as import graph or export graph in a Json format. 
 
