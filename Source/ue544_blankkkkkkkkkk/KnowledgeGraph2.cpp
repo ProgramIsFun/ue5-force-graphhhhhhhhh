@@ -525,6 +525,18 @@ void AKnowledgeGraph::ApplyForces()
 	ll("Ready to calculate link.--------------------------------------", log);
 	calculate_link_force_and_update_velocity();
 	ll("Finish calculating link.--------------------------------------", log);
+
+
+	ll("Warning printing out all things. ", log, 1);
+	// Print out the position and velocity of all the nodes. 
+	for (auto& node : all_nodes)
+	{
+		auto kn = node.Value;
+		ll("node: " + FString::FromInt(node.Key), log);
+		ll("position: " + kn->GetActorLocation().ToString(), log);
+		ll("velocity: " + kn->velocity.ToString(), log);
+	}
+	
 	if (manybody)
 	{
 		ll("Ready to calculate charge.--------------------------------------", log);
