@@ -522,12 +522,25 @@ void AKnowledgeGraph::ApplyForces()
 	// In here velocity of all notes are zeroed
 	// In the following for loop, In the first few loop, the velocity is 0. 
 
+
+
+	ll("11111111111111111Warning printing out all things. ", log, 1);
+	// Print out the position and velocity of all the nodes. 
+	for (auto& node : all_nodes)
+	{
+		auto kn = node.Value;
+		ll("node: " + FString::FromInt(node.Key), log);
+		ll("position: " + kn->GetActorLocation().ToString(), log);
+		ll("velocity: " + kn->velocity.ToString(), log);
+	}
+
+	
 	ll("Ready to calculate link.--------------------------------------", log);
 	calculate_link_force_and_update_velocity();
 	ll("Finish calculating link.--------------------------------------", log);
 
 
-	ll("Warning printing out all things. ", log, 1);
+	ll("222222222222222222Warning printing out all things. ", log, 1);
 	// Print out the position and velocity of all the nodes. 
 	for (auto& node : all_nodes)
 	{
