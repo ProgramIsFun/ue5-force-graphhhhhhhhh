@@ -52,6 +52,9 @@ so that every node will be connected to the previous node, Which eliminates any 
   
 ### 2
 
+When node equal 5, The traversal seems have some difference with the javascript implementation. 
+
+### 3
 Adding functions such as import graph or export graph in a Json format. 
 
 ## A shot introduction to unreal engine 5

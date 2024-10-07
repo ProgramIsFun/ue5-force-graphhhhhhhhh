@@ -86,9 +86,9 @@ void OctreeNode::Subdivide()
 	for (int i = 0; i < 8; ++i)
 	{
 		FVector NewCenter = Center + FVector(
-			(i & 4) ? NewExtent.X : -NewExtent.X,
+			(i & 4) ? NewExtent.Z : -NewExtent.Z,
 			(i & 2) ? NewExtent.Y : -NewExtent.Y,
-			(i & 1) ? NewExtent.Z : -NewExtent.Z
+			(i & 1) ? NewExtent.X : -NewExtent.X
 		);
 		Children[i] = new OctreeNode(NewCenter, NewExtent);
 	}
@@ -312,7 +312,10 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 	{
 		OctreeNode* currentNode = Stack1.top();
 		Stack1.pop();
-
+		ll("--------------------Right now, dealing with:  Lower bound" +
+		 (currentNode->Center - currentNode->Extent).ToString() +
+			" Upper bound" + " " + (currentNode->Center + currentNode->Extent).ToString(), log);
+		ll("Prepare to call the call back functions with this node. ", log);
 		// Execute the callback on the current node
 		bool skipChildren = callback(currentNode, kn, alpha);
 
@@ -343,6 +346,9 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 				{
 					if (child->Data || !child->IsLeaf())
 					{
+						ll("i" + FString::FromInt(i), log);
+						ll("Lower bound" + (child->Center - child->Extent).ToString() +
+						   " Upper bound" + (child->Center + child->Extent).ToString(), log);
 						Stack1.push(child);
 					}
 				}
