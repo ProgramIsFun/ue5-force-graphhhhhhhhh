@@ -55,6 +55,7 @@ so that every node will be connected to the previous node, Which eliminates any 
 When node equal 5, The traversal seems have some difference with the javascript implementation. 
 
 ```
+
 Traverse the tree And calculate velocity on this Actor Kn, nodekey: -0
 --------------------Right now, dealing with:  Lower boundX=-8.000 Y=-17.000 Z=0.000 Upper bound X=24.000 Y=15.000 Z=32.000
 Prepare to call the call back functions with this node. 
@@ -76,15 +77,12 @@ Prepare to call the call back functions with this node.
 -----------------
 -8.0 -1.0 0.0 8.0 15.0 16.0
 22222222222222222 You need to return false here. 
-i3
+i6
 Lower boundX=-8.000 Y=7.000 Z=8.000 Upper boundX=0.000 Y=15.000 Z=16.000
+i4
+Lower boundX=-8.000 Y=-1.000 Z=8.000 Upper boundX=0.000 Y=7.000 Z=16.000
 i2
 Lower boundX=-8.000 Y=7.000 Z=0.000 Upper boundX=0.000 Y=15.000 Z=8.000
-i1
-Lower boundX=-8.000 Y=-1.000 Z=8.000 Upper boundX=0.000 Y=7.000 Z=16.000
---------------------Right now, dealing with:  Lower boundX=-8.000 Y=-1.000 Z=8.000 Upper bound X=0.000 Y=7.000 Z=16.000
-Prepare to call the call back functions with this node. 
-
 
 
 
