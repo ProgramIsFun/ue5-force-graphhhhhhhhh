@@ -10,6 +10,11 @@ replicate the result of the popular library https://github.com/vasturiano/3d-for
 ![image](https://github.com/user-attachments/assets/4e648745-8ee3-4fc7-9008-fd1d53785711)
 
 
+## Main reference of this project
+
+Dependency link
+
+https://vasturiano.github.io/3d-force-graph/example/large-graph/ -> https://github.com/vasturiano/three-forcegraph -> https://github.com/vasturiano/d3-force-3d -> https://github.com/vasturiano/d3-octree
 
 
 
