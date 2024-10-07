@@ -378,7 +378,19 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		float distancemin = 1;
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
 
-		ll("lower: " + (node->Center - node->Extent).ToString() + " upper: " + (node->Center + node->Extent).ToString(), log);
+		ll(FString::SanitizeFloat(node->Center.X - node->Extent.X)+ " " +
+			FString::SanitizeFloat(node->Center.Y - node->Extent.Y) + " " +
+			FString::SanitizeFloat(node->Center.Z - node->Extent.Z) + " " +
+			FString::SanitizeFloat(node->Center.X + node->Extent.X)+ " " +
+			FString::SanitizeFloat(node->Center.Y + node->Extent.Y) + " " +
+			FString::SanitizeFloat(node->Center.Z + node->Extent.Z), log);
+
+		
+
+		
+		// ll("lower: " + (node->Center - node->Extent).ToString() +
+		// 	" upper: " + (node->Center + node->Extent).ToString(), log);
+
 		// ll("width: " + width.ToString(), log);
 		ll("dir: " + dir.ToString(), log2);
 		ll("l: " + FString::SanitizeFloat(l), log2);
