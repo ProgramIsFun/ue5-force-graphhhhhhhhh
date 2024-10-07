@@ -68,6 +68,11 @@ bool OctreeNode::ContainsPoint(const FVector point) const
 
 void OctreeNode::Subdivide()
 {
+
+
+
+
+	bool log = true;
 	if (
 		!IsLeaf() // 
 		||
@@ -86,10 +91,19 @@ void OctreeNode::Subdivide()
 	for (int i = 0; i < 8; ++i)
 	{
 		FVector NewCenter = Center + FVector(
-			(i & 4) ? NewExtent.Z : -NewExtent.Z,
+			(i & 1) ? NewExtent.X : -NewExtent.X,
 			(i & 2) ? NewExtent.Y : -NewExtent.Y,
-			(i & 1) ? NewExtent.X : -NewExtent.X
+			(i & 4) ? NewExtent.Z : -NewExtent.Z
 		);
+
+		if (Center-Extent==FVector(-8,-1,0)&& Center+Extent==FVector(8,15,16))
+		{
+			ll("i: " + FString::FromInt(i) +
+				"newLower bound" + (NewCenter - NewExtent).ToString() +
+				" newUpper bound" + (NewCenter + NewExtent).ToString(), log);
+		}
+		
+		
 		Children[i] = new OctreeNode(NewCenter, NewExtent);
 	}
 
