@@ -59,6 +59,9 @@ struct OctreeNode
 	bool IsLeaf() const;
 	bool ContainsPoint(const FVector point) const;
 
+	// Print data that is stored in the octree node
+	void PrintData() const;
+	
 	void Subdivide();
 	void CalculateCenterOfMass();
 	void AccumulateStrengthAndComputeCenterOfMass();

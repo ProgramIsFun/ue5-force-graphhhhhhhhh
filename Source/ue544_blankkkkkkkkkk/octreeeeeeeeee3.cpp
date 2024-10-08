@@ -66,6 +66,26 @@ bool OctreeNode::ContainsPoint(const FVector point) const
 		FMath::Abs(point.Z - Center.Z) <= Extent.Z);
 }
 
+void OctreeNode::PrintData() const
+{
+	bool log = true;
+	if (Data)
+	{
+		if (Data->Node)
+		{
+			ll("77777777777777Data: " + Data->Node->GetActorLocation().ToString(),log);
+		}
+	}
+
+	for (auto child : Children)
+	{
+		if (child)
+		{
+			child->PrintData();
+		}
+	}
+}
+
 void OctreeNode::Subdivide()
 {
 
@@ -363,6 +383,9 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 						ll("i" + FString::FromInt(i), log);
 						ll("Lower bound" + (child->Center - child->Extent).ToString() +
 						   " Upper bound" + (child->Center + child->Extent).ToString(), log);
+						ll("printing the data of the child", log);
+						child->PrintData();
+						ll("finished printing the data of the child", log);
 						Stack1.push(child);
 					}
 				}
