@@ -54,44 +54,8 @@ OctreeNode::~OctreeNode()
 	Data = nullptr; // Reset pointer to nullptr after deletion
 }
 
-bool OctreeNode::IsLeaf() const
-{
-	return Children[0] == nullptr;
-}
-
-bool OctreeNode::ContainsPoint(const FVector point) const
-{
-	return (FMath::Abs(point.X - Center.X) <= Extent.X &&
-		FMath::Abs(point.Y - Center.Y) <= Extent.Y &&
-		FMath::Abs(point.Z - Center.Z) <= Extent.Z);
-}
-
-void OctreeNode::PrintData() const
-{
-	bool log = true;
-	if (Data)
-	{
-		if (Data->Node)
-		{
-			ll("77777777777777Data: " + Data->Node->GetActorLocation().ToString(),log);
-		}
-	}
-
-	for (auto child : Children)
-	{
-		if (child)
-		{
-			child->PrintData();
-		}
-	}
-}
-
 void OctreeNode::Subdivide()
 {
-
-
-
-
 	bool log = true;
 	if (
 		!IsLeaf() // 
@@ -116,14 +80,14 @@ void OctreeNode::Subdivide()
 			(i & 4) ? NewExtent.Z : -NewExtent.Z
 		);
 
-		if (Center-Extent==FVector(-8,-1,0)&& Center+Extent==FVector(8,15,16))
+		if (Center - Extent == FVector(-8, -1, 0) && Center + Extent == FVector(8, 15, 16))
 		{
 			ll("i: " + FString::FromInt(i) +
-				"newLower bound" + (NewCenter - NewExtent).ToString() +
-				" newUpper bound" + (NewCenter + NewExtent).ToString(), log);
+			   "newLower bound" + (NewCenter - NewExtent).ToString() +
+			   " newUpper bound" + (NewCenter + NewExtent).ToString(), log);
 		}
-		
-		
+
+
 		Children[i] = new OctreeNode(NewCenter, NewExtent);
 	}
 
@@ -139,13 +103,39 @@ void AddDataPoint(OctreeNode* node, AKnowledgeNode* kn)
 	if (!node->IsLeaf())
 	{
 		// Recursively found the leaf node to add the data point
-		for (auto* child : node->Children)
+
+
+		if (0)
 		{
-			if (child->ContainsPoint(newPoint))
+			for (auto* child : node->Children)
 			{
-				AddDataPoint(child, kn);
-				return;
+				if (1)
+				{
+					// This method is slow. 
+					if (child->ContainsPoint(newPoint))
+					{
+						AddDataPoint(child, kn);
+						return;
+					}
+				}
+				else
+				{
+				}
 			}
+		}
+		else
+		{
+			// FVector NewCenter = Center + FVector(
+			// (i & 1) ? NewExtent.X : -NewExtent.X,
+			// (i & 2) ? NewExtent.Y : -NewExtent.Y,
+			// (i & 4) ? NewExtent.Z : -NewExtent.Z
+
+			// We determine which region by just comparing the center of the node with the new point.
+			// int i = (z >= zm ? 4 : 0) | (y >= ym ? 2 : 0) | (x >= xm ? 1 : 0);
+			int32 i = (newPoint.Z >= node->Center.Z ? 4 : 0) | (newPoint.Y >= node->Center.Y ? 2 : 0) | (newPoint.X >= node->Center.X ? 1 : 0);
+
+			AddDataPoint(node->Children[i], kn);
+			
 		}
 	}
 	else
@@ -347,8 +337,8 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 		OctreeNode* currentNode = Stack1.top();
 		Stack1.pop();
 		ll("--------------------Right now, dealing with:  Lower bound" +
-		 (currentNode->Center - currentNode->Extent).ToString() +
-			" Upper bound" + " " + (currentNode->Center + currentNode->Extent).ToString(), log);
+		   (currentNode->Center - currentNode->Extent).ToString() +
+		   " Upper bound" + " " + (currentNode->Center + currentNode->Extent).ToString(), log);
 		ll("Prepare to call the call back functions with this node. ", log);
 		// Execute the callback on the current node
 		bool skipChildren = callback(currentNode, kn, alpha);
@@ -397,7 +387,7 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 {
 	bool log = true;
-	bool log2=false;
+	bool log2 = false;
 	ll("-----------------", log);
 	// ll("SampleCallback", log);
 
@@ -421,16 +411,14 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		float distancemin = 1;
 		// ll("bounds: " + node->Center.ToString() + " " + node->Extent.ToString());
 
-		ll(FString::SanitizeFloat(node->Center.X - node->Extent.X)+ " " +
-			FString::SanitizeFloat(node->Center.Y - node->Extent.Y) + " " +
-			FString::SanitizeFloat(node->Center.Z - node->Extent.Z) + " " +
-			FString::SanitizeFloat(node->Center.X + node->Extent.X)+ " " +
-			FString::SanitizeFloat(node->Center.Y + node->Extent.Y) + " " +
-			FString::SanitizeFloat(node->Center.Z + node->Extent.Z), log);
+		ll(FString::SanitizeFloat(node->Center.X - node->Extent.X) + " " +
+		   FString::SanitizeFloat(node->Center.Y - node->Extent.Y) + " " +
+		   FString::SanitizeFloat(node->Center.Z - node->Extent.Z) + " " +
+		   FString::SanitizeFloat(node->Center.X + node->Extent.X) + " " +
+		   FString::SanitizeFloat(node->Center.Y + node->Extent.Y) + " " +
+		   FString::SanitizeFloat(node->Center.Z + node->Extent.Z), log);
 
-		
 
-		
 		// ll("lower: " + (node->Center - node->Extent).ToString() +
 		// 	" upper: " + (node->Center + node->Extent).ToString(), log);
 
@@ -495,9 +483,9 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 					ll("dir: " + dir.ToString(), log2);
 					ll("node->Strength: " + FString::SanitizeFloat(node->Strength), log2);
 					ll("alpha: " + FString::SanitizeFloat(alpha), log2);
-				
-					ll("vector: " + Vector.ToString()  + " velocity: " + kn->
-					   velocity.ToString(), log2);
+
+					ll("vector: " + Vector.ToString() + " velocity: " + kn->
+					                                                    velocity.ToString(), log2);
 				}
 
 				// float mult = pow(ns.strength / nodeStrength, 1.0);
@@ -536,14 +524,14 @@ bool SampleCallback(OctreeNode* node, AKnowledgeNode* kn, float alpha)
 		if (node->Data == nullptr)
 
 		{
-			ll("Data is null", log,2);
+			ll("Data is null", log, 2);
 			return true;
 		}
 		else
 		{
 			if (node->Data->Node == nullptr)
 			{
-				ll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.", log,2);
+				ll("Pointer is null!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!.", log, 2);
 			}
 			else
 			{
