@@ -80,14 +80,7 @@ void lll(const FString& TextToWrite)
 
 void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& Prefix)
 {
-	if (!LOG)
-	{
-		return;
-	}
-
-
-	bool nologgggggggg = false;
-
+	bool nologgggggggg = true;
 	if (nologgggggggg)
 	{
 		return;
@@ -95,6 +88,14 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 	else
 	{
 	}
+
+	if (!LOG)
+	{
+		return;
+	}
+
+
+	
 	if (!StringToLog.IsEmpty())
 	{
 		FString LogMessage = Prefix + StringToLog; // Prepends a prefix to the original message
