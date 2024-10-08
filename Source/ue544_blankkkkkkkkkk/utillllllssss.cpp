@@ -80,7 +80,7 @@ void lll(const FString& TextToWrite)
 
 void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& Prefix)
 {
-	bool nologgggggggg = true;
+	bool nologgggggggg = false;
 	if (nologgggggggg)
 	{
 		return;
@@ -93,8 +93,7 @@ void ll(const FString& StringToLog, bool LOG, int SeverityLevel, const FString& 
 	{
 		return;
 	}
-
-
+	
 	
 	if (!StringToLog.IsEmpty())
 	{

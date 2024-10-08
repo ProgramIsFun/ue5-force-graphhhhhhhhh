@@ -80,12 +80,12 @@ void OctreeNode::Subdivide()
 			(i & 4) ? NewExtent.Z : -NewExtent.Z
 		);
 
-		if (Center - Extent == FVector(-8, -1, 0) && Center + Extent == FVector(8, 15, 16))
-		{
-			ll("i: " + FString::FromInt(i) +
-			   "newLower bound" + (NewCenter - NewExtent).ToString() +
-			   " newUpper bound" + (NewCenter + NewExtent).ToString(), log);
-		}
+		// if (Center - Extent == FVector(-8, -1, 0) && Center + Extent == FVector(8, 15, 16))
+		// {
+		// 	ll("i: " + FString::FromInt(i) +
+		// 	   "newLower bound" + (NewCenter - NewExtent).ToString() +
+		// 	   " newUpper bound" + (NewCenter + NewExtent).ToString(), log);
+		// }
 
 
 		Children[i] = new OctreeNode(NewCenter, NewExtent);
@@ -373,9 +373,13 @@ void TraverseBFS(OctreeNode* root, OctreeCallback callback, float alpha, AKnowle
 						ll("i" + FString::FromInt(i), log);
 						ll("Lower bound" + (child->Center - child->Extent).ToString() +
 						   " Upper bound" + (child->Center + child->Extent).ToString(), log);
-						ll("printing the data of the child", log);
-						child->PrintData();
-						ll("finished printing the data of the child", log);
+						if (0)
+						{
+							ll("printing the data of the child", log);
+							child->PrintData();
+							ll("finished printing the data of the child", log);
+							
+						}
 						Stack1.push(child);
 					}
 				}
