@@ -15,18 +15,31 @@ void AKnowledgeGraph::defaultGenerateGraphMethod()
 	bool log = true;
 	//Retrieving an array property and printing each field
 	int jnodes11 = jnodes1;
+
+
+	
 	for (int32 i = 0; i < jnodes11; i++)
 	{
 		int jid = i;
+
+
 		AKnowledgeNode* kn = GetWorld()->SpawnActor<AKnowledgeNode>();
-		if (kn)
+
+
+		if (0)
 		{
-			UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(
-				kn->GetComponentByClass(UPrimitiveComponent::StaticClass()));
-			if (PrimitiveComponent)
+			if (kn)
 			{
-				PrimitiveComponent->SetSimulatePhysics(false);
-				PrimitiveComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+				UPrimitiveComponent* PrimitiveComponent = Cast<UPrimitiveComponent>(
+					kn->GetComponentByClass(UPrimitiveComponent::StaticClass()));
+				if (1)
+				{
+					if (PrimitiveComponent)
+					{
+						PrimitiveComponent->SetSimulatePhysics(false);
+						PrimitiveComponent->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+					}
+				}
 			}
 		}
 		AddNode1(jid, kn);
@@ -54,10 +67,10 @@ void AKnowledgeGraph::defaultGenerateGraphMethod()
 		for (int32 i = 1; i < jedges11; i++)
 		{
 			int jid = i - 1;
-			int jsource = i ; // Ensures jsource is always valid within the index range
+			int jsource = i; // Ensures jsource is always valid within the index range
 
 			// Connected to random node 
-			int jtarget = i-1;
+			int jtarget = i - 1;
 			AddEdge(jid, jsource, jtarget);
 		}
 	}
@@ -310,71 +323,11 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 {
 	bool log = true;
 	bool log2 = false;
-	if (1)
+
+	
+	if (!many_body_use_brute_force)
 	{
-		if (0)
-		{
-			// //charge forces
-			// octree_node_strengths.Empty();
-			//
-			// // Instead of removing the elements we create a new tree again. 	
-			// if (1)
-			// {
-			// 	ll("We now calculate a bound suitable. To be implemented.  ");
-			//
-			//
-			//
-			//
-			// 	InitOctree(FBox(
-			// 			FVector(-200, -200, -200),
-			// 			FVector(200, 200, 200)
-			// 		)
-			// 	);
-			// }
-			// else
-			// {
-			// 	InitOctree(FBox(
-			// 			FVector(0, 0, 0),
-			// 			FVector(1, 1, 1)
-			// 		)
-			// 	);
-			// }
-			//
-			//
-			// for (auto& node : all_nodes)
-			// {
-			// 	int key = node.Key;
-			// 	auto kn = node.Value;
-			//
-			//
-			// 	// Because the actor location hasn't changed when we compute the link force, so These two lines could actually be put in the start of the function. 
-			//
-			// 	// If they are remove here，then why we do AddOctreeElement(ote) in AddNode?
-			//
-			//
-			// 	if (0)
-			// 	{
-			// 		RemoveElement(node.Key); //need to remove then update with new location when adding
-			// 		AddNode(key, kn, kn->GetActorLocation());
-			// 	}
-			// 	else
-			// 	{
-			// 	
-			// 		AddNode(key, kn, kn->GetActorLocation());
-			// 	
-			// 	}
-			//
-			//
-			// }
-			//
-			// Accumulate();
-			//
-			// for (auto& node : all_nodes)
-			// {
-			// 	ApplyManyBody(node.Value);
-			// }
-		}
-		else
+		
 		{
 			//
 			OctreeData2 = new OctreeNode(
@@ -389,18 +342,84 @@ void AKnowledgeGraph::calculate_charge_force_and_update_velocity()
 			ll("!!!OctreeData2->CenterOfMass: " + OctreeData2->CenterOfMass.ToString(), log);
 			ll("!!!OctreeData2->strength: " + FString::SanitizeFloat(OctreeData2->Strength), log);
 
-			for (auto& node : all_nodes)
+
+			if (!use_parallel)
 			{
-				ll("--------------------------------------", log);
-				ll(
-					"Traverse the tree And calculate velocity on this Actor Kn, nodekey: -"
-					+
-					FString::FromInt(node.Key), log);
-				TraverseBFS(OctreeData2, SampleCallback, alpha, node.Value);
-				ll("Finished traversing the tree based on this Actor Kn. ", log);
+				for (auto& node : all_nodes)
+				{
+					ll("--------------------------------------", log);
+					ll(
+						"Traverse the tree And calculate velocity on this Actor Kn, nodekey: -"
+						+
+						FString::FromInt(node.Key), log);
+					TraverseBFS(OctreeData2, SampleCallback, alpha, node.Value);
+					ll("Finished traversing the tree based on this Actor Kn. ", log);
+				}
 			}
+			else
+			{
+				ll("If this parallel for loops, "
+					"there will be an error and crashed the game after we end"
+					"ComponentsThatNeedEndOfFrameUpdate_OnGameThread");
+				ParallelFor(all_nodes.Num(), [&](int32 Index)
+				{
+					auto node = all_nodes[Index];
+
+					TraverseBFS(OctreeData2, SampleCallback, alpha, node);
+				});
+			}
+
+
 			ll("Finished traversing, now we can delete the tree. ", log);
 			delete OctreeData2;
+		}
+	}
+	else
+	{
+		if (!use_parallel)
+		{
+			// Brute force
+			for (auto& node : all_nodes)
+			{
+				auto kn = node.Value;
+
+				for (auto& node2 : all_nodes)
+				{
+					auto kn2 = node2.Value;
+					if (kn != kn2)
+					{
+						FVector dir = kn2->GetActorLocation() - kn->GetActorLocation();
+						float l = dir.Size() * dir.Size();
+						if (l < distancemin)
+						{
+							l = sqrt(distancemin * l);
+						}
+						kn->velocity += dir * nodeStrength * alpha / l;
+				
+					}
+				}
+			}
+		}
+		else
+		{
+			ParallelFor(all_nodes.Num(), [&](int32 Index)
+			{
+				auto kn = all_nodes[Index];
+				for (auto& node2 : all_nodes)
+				{
+					auto kn2 = node2.Value;
+					if (kn != kn2)
+					{
+						FVector dir = kn2->GetActorLocation() - kn->GetActorLocation();
+						float l = dir.Size() * dir.Size();
+						if (l < distancemin)
+						{
+							l = sqrt(distancemin * l);
+						}
+						kn->velocity += dir * nodeStrength * alpha / l;
+					}
+				}
+			});
 		}
 	}
 }
@@ -450,55 +469,38 @@ void AKnowledgeGraph::apply_center_force_and_move_the_node_directly()
 
 void AKnowledgeGraph::update_actor_location_based_on_velocity()
 {
-	for (auto& node : all_nodes)
+	if (!use_parallel)
 	{
-		auto kn = node.Value;
-
-
-		if (0)
+		for (auto& node : all_nodes)
 		{
-			ll("POSITION! node: " + FString::FromInt(node.Key));
-			ll("position: " + kn->GetActorLocation().ToString());
-			ll("velocity: " + kn->velocity.ToString());
+			auto kn = node.Value;
+		
+			kn->velocity *= velocityDecay;
+		
+			FVector NewLocation = kn->GetActorLocation() + kn->velocity;
+
+			kn->SetActorLocation(
+				NewLocation
+			);
 		}
-		else
+	}
+	else
+	{
+
+		// Assertion failed: ComponentsThatNeedEndOfFrameUpdate_OnGameThread.IsValidIndex(ArrayIndex) [File:D:\build\++UE5\Sync\Engine\Source\Runtime\Engine\Private\LevelTick.cpp] [Line: 872]
+
+		ParallelFor(all_nodes.Num(), [&](int32 Index)
 		{
-		}
+			auto kn = all_nodes[Index];
+		
+			kn->velocity *= velocityDecay;
+		
+			FVector NewLocation = kn->GetActorLocation() + kn->velocity;
 
-
-		kn->velocity *= velocityDecay;
-
-
-		FVector NewLocation = kn->GetActorLocation() + kn->velocity;
-
-		kn->SetActorLocation(
-			NewLocation
-		);
-		if (0)
-		{
-			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-			ll("position: " + kn->GetActorLocation().ToString());
-			ll("velocity: " + kn->velocity.ToString());
-		}
-		else
-		{
-		}
-
-
-		if (0)
-		{
-			kn->velocity *= 0; //reset velocities
-		}
-
-		if (0)
-		{
-			ll("FINAL POSITION! node: " + FString::FromInt(node.Key));
-			ll("position: " + kn->GetActorLocation().ToString());
-			ll("velocity: " + kn->velocity.ToString());
-		}
-		else
-		{
-		}
+			kn->SetActorLocation(
+				NewLocation
+			);
+		});
 	}
 }
 
@@ -523,33 +525,45 @@ void AKnowledgeGraph::ApplyForces()
 	// In the following for loop, In the first few loop, the velocity is 0. 
 
 
-
 	ll("11111111111111111Warning printing out all things. ", log, 1);
-	// Print out the position and velocity of all the nodes. 
-	for (auto& node : all_nodes)
+
+	if (0)
 	{
-		auto kn = node.Value;
-		ll("node: " + FString::FromInt(node.Key), log);
-		ll("position: " + kn->GetActorLocation().ToString(), log);
-		ll("velocity: " + kn->velocity.ToString(), log);
+		// Print out the position and velocity of all the nodes. 
+		for (auto& node : all_nodes)
+		{
+			auto kn = node.Value;
+			ll("node: " + FString::FromInt(node.Key), log);
+			ll("position: " + kn->GetActorLocation().ToString(), log);
+			ll("velocity: " + kn->velocity.ToString(), log);
+		}
 	}
 
-	
+
 	ll("Ready to calculate link.--------------------------------------", log);
+
+	double start = FPlatformTime::Seconds();
 	calculate_link_force_and_update_velocity();
+	double end = FPlatformTime::Seconds();
+
+
 	ll("Finish calculating link.--------------------------------------", log);
 
 
-	ll("222222222222222222Warning printing out all things. ", log, 1);
-	// Print out the position and velocity of all the nodes. 
-	for (auto& node : all_nodes)
+	if (0)
 	{
-		auto kn = node.Value;
-		ll("node: " + FString::FromInt(node.Key), log);
-		ll("position: " + kn->GetActorLocation().ToString(), log);
-		ll("velocity: " + kn->velocity.ToString(), log);
+		ll("222222222222222222Warning printing out all things. ", log, 1);
+
+		// Print out the position and velocity of all the nodes. 
+		for (auto& node : all_nodes)
+		{
+			auto kn = node.Value;
+			ll("node: " + FString::FromInt(node.Key), log);
+			ll("position: " + kn->GetActorLocation().ToString(), log);
+			ll("velocity: " + kn->velocity.ToString(), log);
+		}
 	}
-	
+
 	if (manybody)
 	{
 		ll("Ready to calculate charge.--------------------------------------", log);
@@ -875,94 +889,91 @@ void AKnowledgeGraph::tttttttttttt()
 // 	OctreeData->AddElement(inNewOctreeElement);
 // }
 
+
 void AKnowledgeGraph::initializeNodePosition()
 {
-	if (0)
-	{
-		for (auto& node : all_nodes)
-		{
-			float radius = initialRadius * sqrt(node.Key);
-			float angle = node.Key * initialAngle;
-			FVector init_pos = FVector(cos(angle), sin(angle), tan(angle)) * radius;
-
-			// Remember that the note value stored the actual object. 
-			node.Value->SetActorLocation(init_pos, false);
-			//        print("init position");
-			//        print(node.Value->GetActorLocation().ToString());
-			node.Value->velocity = FVector(0, 0, 0);
-		}
-	}
-	else
+	if (!use_parallel)
 	{
 		// To replicate the node indexing from the original JS function
 		for (auto& node : all_nodes)
 		{
 			int index = node.Key;
 			// Calculate index-based radius differently based on the number of dimensions
-			float radius;
-			int nDim = 3;
-			if (nDim > 2)
-			{
-				radius = initialRadius * cbrt(0.5f + index);
-			}
-			else if (nDim > 1)
-			{
-				radius = initialRadius * sqrt(0.5f + index);
-			}
-			else
-			{
-				radius = initialRadius * index;
-			}
-
-			float initialAngleRoll = PI * (3 - sqrt(5)); // Roll angle
-
-			// Following will be Math.PI * 20 / (9 + Math.sqrt(221));
-			float initialAngleYaw = PI * 20 / (9 + sqrt(221)); // Yaw angle if needed (3D)
-
-
-			float rollAngle = index * initialAngleRoll; // Roll angle
-			float yawAngle = index * initialAngleYaw; // Yaw angle if needed (3D)
-
-			FVector init_pos;
-
-			if (nDim == 1)
-			{
-				// 1D: Positions along X axis
-				init_pos = FVector(radius, 0, 0);
-			}
-			else if (nDim == 2)
-			{
-				// 2D: Circular distribution
-				init_pos = FVector(radius * cos(rollAngle), radius * sin(rollAngle), 0);
-			}
-			else
-			{
-				// 3D: Spherical distribution
-				init_pos = FVector(radius * sin(rollAngle) * cos(yawAngle), radius * cos(rollAngle),
-				                   radius * sin(rollAngle) * sin(yawAngle));
-			}
-
-			// Set the initial position of the node Actor
-			if (node.Value)
-			{
-				// Check if pointer is valid
-				node.Value->SetActorLocation(init_pos, false);
-
-				ll("index: " + FString::FromInt(index) + " init_pos: " + init_pos.ToString());
-
-				// Log the initial position - Uncomment to use
-				// UE_LOG(LogTemp, Warning, TEXT("Init position: %s"), *init_pos.ToString());
-
-				// Set initial velocity to zero
-				node.Value->velocity = FVector(0, 0, 0);
-			}
-
-			// Increment index for next node
-			// index++;
+			UpdateNodePosition(node.Value, index, 3, initialRadius);
 		}
+	}
+	else
+	{
+		ParallelFor(all_nodes.Num(), [&](int32 index)
+		            {
+			            UpdateNodePosition(all_nodes[index], index, 3, initialRadius);
+		            }
+
+		);
 	}
 }
 
+void AKnowledgeGraph::UpdateNodePosition(AKnowledgeNode* node, int index, int NumDimensions, float InitialRadius)
+{
+	// Calculate index-based radius
+	float radius;
+	int nDim = 3;
+	if (nDim > 2)
+	{
+		radius = initialRadius * cbrt(0.5f + index);
+	}
+	else if (nDim > 1)
+	{
+		radius = initialRadius * sqrt(0.5f + index);
+	}
+	else
+	{
+		radius = initialRadius * index;
+	}
+
+	float initialAngleRoll = PI * (3 - sqrt(5)); // Roll angle
+
+	// Following will be Math.PI * 20 / (9 + Math.sqrt(221));
+	float initialAngleYaw = PI * 20 / (9 + sqrt(221)); // Yaw angle if needed (3D)
+
+
+	float rollAngle = index * initialAngleRoll; // Roll angle
+	float yawAngle = index * initialAngleYaw; // Yaw angle if needed (3D)
+
+	FVector init_pos;
+
+	if (nDim == 1)
+	{
+		// 1D: Positions along X axis
+		init_pos = FVector(radius, 0, 0);
+	}
+	else if (nDim == 2)
+	{
+		// 2D: Circular distribution
+		init_pos = FVector(radius * cos(rollAngle), radius * sin(rollAngle), 0);
+	}
+	else
+	{
+		// 3D: Spherical distribution
+		init_pos = FVector(radius * sin(rollAngle) * cos(yawAngle), radius * cos(rollAngle),
+		                   radius * sin(rollAngle) * sin(yawAngle));
+	}
+
+	// Set the initial position of the node Actor
+	if (node)
+	{
+		// Check if pointer is valid
+		node->SetActorLocation(init_pos, false);
+
+		ll("index: " + FString::FromInt(index) + " init_pos: " + init_pos.ToString());
+
+		// Log the initial position - Uncomment to use
+		// UE_LOG(LogTemp, Warning, TEXT("Init position: %s"), *init_pos.ToString());
+
+		// Set initial velocity to zero
+		node->velocity = FVector(0, 0, 0);
+	}
+}
 
 void AKnowledgeGraph::CalculateBiasstrengthOflinks()
 {
@@ -1097,6 +1108,7 @@ void AKnowledgeGraph::AddEdge(int32 id, int32 source, int32 target)
 				UClass* loadedClass = StaticLoadClass(UObject::StaticClass(), nullptr,
 				                                      TEXT(
 					                                      // "Blueprint'/Game/Characters/Enemies/BP_LitchBoss1.BP_LitchBoss1_C'"
+					                                      // "Blueprint'/Game/kkkkk/extending_the_edge77.extending_the_edge77_C'"
 					                                      "Blueprint'/Game/kkkkk/NewBlueprint22222.NewBlueprint22222_C'"
 
 				                                      ));

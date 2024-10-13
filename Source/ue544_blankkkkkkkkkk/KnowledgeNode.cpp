@@ -16,7 +16,7 @@
 AKnowledgeNode::AKnowledgeNode()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 	if (0)
 	{
 		AutoPossessPlayer = EAutoReceiveInput::Player0;
@@ -53,7 +53,7 @@ AKnowledgeNode::AKnowledgeNode()
 		// Configure the default text settings
 		TextComponent->SetText(FText::FromString(TEXT("Hello, World!")));
 		TextComponent->SetHorizontalAlignment(EHorizTextAligment::EHTA_Center);
-		TextComponent->SetWorldSize(50.f);
+		TextComponent->SetWorldSize(1.f);
 	}
 }
 

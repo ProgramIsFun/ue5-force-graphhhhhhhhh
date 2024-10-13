@@ -32,11 +32,13 @@ void AKnowledgeGraph::BeginPlay()
 {
 	Super::BeginPlay();
 
+	ClearLogFile();
 
-	UE_LOG(LogTemp, Warning, TEXT("Begin play called, Restricting tick interval"));
 
 	if (use_tick_interval)
 	{
+		UE_LOG(LogTemp, Warning, TEXT("Restricting tick interval"));
+
 		PrimaryActorTick.TickInterval = tick_interval;
 	}
 
@@ -54,36 +56,35 @@ void AKnowledgeGraph::BeginPlay()
 	}
 
 
-	generateGraph();
+	// generateGraph();
+	timeThisMemberFunction(
+"AKnowledgeGraph::generateGraph",
+	&AKnowledgeGraph::generateGraph);
 
 
 	if (!init)
 	{
-		initializeNodePosition();
+		
+		timeThisMemberFunction(
+"AKnowledgeGraph::initializeNodePosition",
+		&AKnowledgeGraph::initializeNodePosition);
 
-
-		CalculateBiasstrengthOflinks();
+		timeThisMemberFunction(
+"AKnowledgeGraph::CalculateBiasstrengthOflinks",
+		&AKnowledgeGraph::CalculateBiasstrengthOflinks);
 	}
 
-	ClearLogFile();
 }
 
 
 
 void AKnowledgeGraph::Tick(float DeltaTime)
 {
-	bool log = true;
 	Super::Tick(DeltaTime);
 
-	if (GEngine)
-	{
-		// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
-	}
-	else
-	{
-		ll("Engine is not available for some reasonssssssssssssssssssssssss");
-		return;
-	}
+	bool log = true;
+
+	// GEngine->AddOnScreenDebugMessage(-1, 10, FColor::White, "TICK");
 
 
 	iterations += 1;
@@ -97,6 +98,11 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 	if (1)
 	{
+
+		double StartTime = FPlatformTime::Seconds();
+
+		
+		
 		
 		ll("TICK----------------------------------------------------------------------------"
 			"----------------------------------------------------------------------------",log);
@@ -119,9 +125,35 @@ void AKnowledgeGraph::Tick(float DeltaTime)
 
 		ll("update actor location based on velocity",log);
 		update_actor_location_based_on_velocity();
-
+		
 		ll("update link position",log);
 		update_link_position();
+
+
+		
+		
+
+		
+		// Optionally, log the average time every N ticks
+		if (0)
+		{
+			double EndTime = FPlatformTime::Seconds();
+			double ElapsedTime = EndTime - StartTime;
+			lll(FString::SanitizeFloat(ElapsedTime));
+			// Accumulate the elapsed time and increment the tick count
+			TotalElapsedTime += ElapsedTime;
+			TickCount++;
+
+			
+			if (TickCount % 10 == 0)
+			{
+				// Calculate the average time per tick
+				double AverageTime = TotalElapsedTime / TickCount;
+				lll("Average Tick time after " + FString::FromInt(TickCount) + " ticks is " + FString::SanitizeFloat(AverageTime) + " seconds.");
+				UE_LOG(LogTemp, Log, TEXT("Average Tick time after %d ticks is %f seconds."), TickCount, AverageTime);
+			}
+		}
+
 	}
 	else
 	{

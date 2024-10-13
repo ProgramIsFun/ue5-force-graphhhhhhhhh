@@ -10,7 +10,26 @@
 #include "CoreMinimal.h"
 #include "octreeeeeeeeee3.h"
 
+
+
+
+#include "utillllllssss.h"
+
+
+#include <chrono> // For timing member functions
+
+
+
+
+
+
+
 #include "KnowledgeGraph.generated.h"
+
+
+
+
+
 
 /**
  *
@@ -38,6 +57,8 @@ public:
 	void AddEdge(int32 id, int32 source, int32 target);
 	// void AddOctreeElement(const FOctreeElement& inNewOctreeElement);
 	void initializeNodePosition();
+	
+	void UpdateNodePosition(AKnowledgeNode* node, int index, int NumDimensions, float InitialRadius);
 	// void InitOctree(const FBox& inNewBounds);
 	void CalculateBiasstrengthOflinks();
 	// void RemoveElement(int key);
@@ -49,27 +70,32 @@ public:
 	// const FOctreeNodeContext3 CurrentContext, FString node_id);
 	void tttttttttttt();
 
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	bool use_parallel = false;
+	
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float LOGGGGGGGGG = false;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float alpha = 1;
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float iterations = 0;
-	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
-	float maxiterations = 1000000;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	int32 maxiterations = 1000000;
+
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float alphaMin = 0.001;
 	// float alphaMin = 0.09;
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	// float alphaDecay = pow(alphaMin, 0.05);
 	float alphaDecay = 1 - FMath::Pow(alphaMin, 1.0 / 300);
 
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	int32 wayofinitnodeslinks = 2;
 
 	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
@@ -100,13 +126,16 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	bool connect_to_previous = true;
 
-	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	// UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	float initialRadius = 10;
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
 	// Calculate many body force or not. 
 	bool manybody = true;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category=Attributes)
+	bool many_body_use_brute_force = true;
+	
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -127,7 +156,55 @@ private:
 	OctreeNode* OctreeData2;
 
 
-	// Called every frame
+
+	double TotalElapsedTime = 0.0;
+	int32 TickCount = 0;
+
+
+	
 public:
 	virtual void Tick(float DeltaTime) override;
+
+
+	// Member function that times another member function
+	template<typename Func, typename... Args>
+	auto timeThisMemberFunction(const char* functionName,Func function, Args&&... args) {
+
+		
+		// auto start = std::chrono::high_resolution_clock::now();
+		double StartTime = FPlatformTime::Seconds();
+
+		
+		
+		
+		
+		
+		// Invoke the member function
+		(this->*function)(std::forward<Args>(args)...);
+
+
+
+		
+		// auto end = std::chrono::high_resolution_clock::now();
+		// auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);
+		// lll("Execution time: " + FString::FromInt(duration.count()) + " milliseconds");
+
+
+		
+		double EndTime = FPlatformTime::Seconds();
+		double ElapsedTime = EndTime - StartTime;
+		lll("Elapsed time For " + FString(functionName) + ": " + FString::SanitizeFloat(ElapsedTime) + " seconds");
+		
+
+
+
+
+		return ElapsedTime;
+	}
+
+
+
+
+	
+
 };
